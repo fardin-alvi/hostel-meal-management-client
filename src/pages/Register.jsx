@@ -32,20 +32,34 @@ const Register = () => {
                                 if (res.data.insertedId) {
                                     reset()
                                     navigate('/')
-                                    toast.success('login Successfull')
+                                    toast.success('Registration Successfull')
                             }
                         })
 
                 })
         })
+    }
 
-        
+    const handleGoogle = () => {
+        singinWithGoogle()
+            .then(res => {
+                const user = {
+                    name: res.user.displayName,
+                    email: res.user.email,
+                    photoURL:res.user.photoURL
+                }
+                axiosPublic.post('/users', user)
+                    .then(res => {
+                        navigate('/')
+                        toast.success('Registration Successfull')
+                    })
+            })
     }
 
     return (
         <div className="flex items-center justify-evenly py-16 bg-gradient-to-r from-purple-500 to-pink-500">
 
-            <div className="w-2/4">
+            <div className="hidden md:block w-2/4">
                 <Lottie animationData={lottiefile} loop={true} />
             </div>
 
@@ -113,7 +127,7 @@ const Register = () => {
                         <hr className="w-full border-gray-300" />
                     </div>
 
-                    <button
+                    <button onClick={handleGoogle}
                         className="w-full flex items-center justify-center bg-black text-white border border-gray-300 font-semibold py-2 px-4 rounded-lg hover:bg-opacity-70 "
                     >
                         <FcGoogle className="text-xl mr-2" />
