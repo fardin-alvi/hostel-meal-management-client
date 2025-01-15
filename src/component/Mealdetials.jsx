@@ -1,25 +1,23 @@
 import React, { useState } from 'react';
-import { useLoaderData } from 'react-router-dom';
+import { useLoaderData, useNavigate } from 'react-router-dom';
 import { FaDiagnoses, FaMapMarkerAlt, FaRegStar, FaStar, FaStarHalfAlt } from "react-icons/fa";
 import { MdOutlineTimeline } from "react-icons/md";
 import { BiSolidLike } from "react-icons/bi";
 import useAuth from '../hooks/useAuth';
 import useAxiosSecure from '../hooks/useAxiosSecure';
 import toast from 'react-hot-toast';
+import { useQueries, useQuery } from '@tanstack/react-query';
+import useAxiosPublic from '../hooks/useAxiosPublic';
 
 const Mealdetials = () => {
     const meals = useLoaderData();
-    const { image, title, price, rating, distributor, postTime, description, ingredients } = meals;
+    const { image, title, price, rating, distributor, postTime, description, ingredients, _id,likes } = meals;
     const { user } = useAuth()
     console.log(user);
     const [review, setReview] = useState('');
     const axiosSecure = useAxiosSecure()
-
-    // State for the review input and reviews
-    const [reviews, setReviews] = useState([
-        { name: "David Smith Jones", time: "2 minutes ago", content: "Amazing pizza! The taste was phenomenal. Great service too." },
-        { name: "Christian Gray", time: "5 minutes ago", content: "The pizza was delicious and fresh. Highly recommend." }
-    ]);
+    const axiosPublic = useAxiosPublic()
+    const navigate = useNavigate()
 
     const renderStar = (rating) => {
         const fullstar = Math.floor(rating);
@@ -37,12 +35,12 @@ const Mealdetials = () => {
 
     const handleReviewSubmit = (e) => {
         e.preventDefault();
-            const reviews = {
-                name: user.displayName,
-                email:user.email,
-                photoURL : user.photoURL,
-                review: review,
-            };
+        const reviews = {
+            name: user.displayName,
+            email: user.email,
+            photoURL: user.photoURL,
+            review: review,
+        };
         setReview("");
         try {
             axiosSecure.post('/review', reviews)
@@ -51,32 +49,57 @@ const Mealdetials = () => {
                     setReview(res.data)
                     toast.success('Review Added')
                     setReview('')
-            })
-            
+                })
+
         } catch (error) {
             console.log(error);
         }
 
     };
 
+    const handlelikes = async () => {
+        if (user) {
+            const response = await axiosSecure.patch(`/like/${_id}`);
+            if (response.status === 200) {
+                toast.success('Like added!');
+            }
+        } else {
+            navigate('/login')
+        }
+    }
+
+    const { data: reviews = [] } = useQuery({
+        queryKey: ['review'],
+        queryFn: async () => {
+            const res = await axiosPublic.get('/reviews')
+            return res.data
+        }
+    })
+    console.log(reviews);
+
     return (
         <div className="min-h-screen bg-gradient-to-r from-purple-50 to-pink-50">
             <div className="md:max-w-4xl lg:max-w-6xl mx-auto lg:px-0 px-4 py-5">
-                {/* Image Section */}
-                <img
-                    src={image}
-                    alt="Pizza"
-                    className="rounded-lg w-full h-[400px] object-cover"
-                />
+                <div className="relative">
+                    <img
+                        src={image}
+                        alt="Pizza"
+                        className="rounded-lg w-full h-[400px] object-cover"
+                    />
+                    {
+                        likes && <div className="absolute bottom-2 left-0 bg-black text-white px-3 py-1 rounded flex items-center gap-x-2">
+                            Reactions
+                            <span>{likes}</span>
+                        </div>
+                    }
+                </div>
 
-                {/* Pizza Details */}
                 <div className='mt-5'>
                     <div className='flex justify-between items-center md:items-start md:justify-start md:flex-col'>
                         <h1 className="text-3xl font-bold">{title}</h1>
                         <p className="text-xl font-medium mt-2">${price}</p>
                     </div>
 
-                    {/* Restaurant Details */}
                     <div className="flex flex-col gap-y-2 mt-2">
                         <p className="text-sm flex">{renderStar(rating)}</p>
                         <p className="flex items-center gap-x-5">
@@ -90,8 +113,6 @@ const Mealdetials = () => {
                             </div>
                         </p>
                     </div>
-
-                    {/* Description */}
                     <p className="mt-3">
                         {description}
                     </p>
@@ -99,27 +120,22 @@ const Mealdetials = () => {
                         <span className='font-medium'>Ingredient Used: </span>
                         {ingredients}
                     </p>
-
-                    {/* Favorite Button */}
                     <div className='mt-3 flex gap-x-3'>
                         <button className="flex items-center bg-purple-400 py-2 px-3 rounded-lg">
                             Push for Meal
                         </button>
-                        <button className="flex items-center bg-purple-400 py-2 px-3 rounded-lg">
+                        <button onClick={handlelikes} className="flex items-center bg-purple-400 py-2 px-3 rounded-lg">
                             <BiSolidLike />
                         </button>
                     </div>
                 </div>
-
-                {/* Reviews Section */}
                 <div className="mt-5">
-                    {/* Review Input Box */}
                     <form onSubmit={handleReviewSubmit} className="mb-5">
                         <textarea
                             className="w-full p-3 rounded-lg bg-white"
                             rows="3"
                             placeholder="Write your review here..."
-                            value={review} 
+                            value={review}
                             onChange={(e) => setReview(e.target.value)}
                         ></textarea>
                         <button
@@ -129,15 +145,17 @@ const Mealdetials = () => {
                             Submit Review
                         </button>
                     </form>
-                    {/* <h2 className="text-lg font-semibold mb-3">Reviews ({review.length})</h2> */}
-                    {/* Existing Reviews */}
-                    {/* {review.map((review, index) => (
-                        <div key={index} className="bg-bae-100 border border-gray-300 p-4 rounded-lg mb-3">
-                            <h3 className="font-semibold">{review.name}</h3>
+                    <h2 className="text-lg font-semibold mb-3">Reviews ({reviews.length})</h2>
+                    {reviews.map((review) => (
+                        <div key={review._id} className="bg-bae-100 border border-gray-300 p-4 rounded-lg mb-3">
+                            <div className='flex items-start gap-x-3'>
+                                <img className='rounded-full w-10 h-10' src={review.photoURL} alt="" />
+                                <h3 className="font-semibold">{review.name}</h3>
+                            </div>
                             <p className="text-gray-300 text-sm">{review.time}</p>
-                            <p className="text-gray-400 mt-2">{review.content}</p>
+                            <p className="text-gray-400 mt-2">{review.review}</p>
                         </div>
-                    ))} */}
+                    ))}
                 </div>
             </div>
         </div>
