@@ -22,7 +22,7 @@ const MealCard = ({ meal }) => {
         <div className="card shadow-xl bg-white">
             <figure>
                 <img
-                    src={image}
+                    src={meal?.image}
                     alt="item" />
             </figure>
             <div className="flex flex-col items-center py-4 gap-y-2">

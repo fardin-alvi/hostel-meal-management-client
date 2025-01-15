@@ -7,8 +7,8 @@ const useMeals = () => {
    
        const { data:meals = [],isLoading } = useQuery({
            queryKey: ['meals'],
-           queryFn: async () => {
-               const res = await axiosPublic.get('/meals')
+           queryFn: async (searchMeal) => {
+               const res = await axiosPublic.get(`/meals?search=${searchMeal}`)
                return res.data;
            }
        })
