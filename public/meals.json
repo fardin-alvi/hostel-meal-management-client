@@ -1,0 +1,142 @@
+[
+    {
+      "title": "Pancakes with Maple Syrup",
+      "category": "breakfast",
+      "image": "https://i.ibb.co.com/Lk6VhSS/break.webp",
+      "rating": 4.8,
+      "price": 5.99
+    },
+    {
+      "title": "Vegetable Omelette",
+      "category": "breakfast",
+      "image": "https://i.ibb.co.com/Lk6VhSS/break.webp",
+      "rating": 4.5,
+      "price": 6.49
+    },
+    {
+      "title": "Avocado Toast",
+      "category": "breakfast",
+      "image": "https://i.ibb.co.com/Lk6VhSS/break.webp",
+      "rating": 4.7,
+      "price": 7.29
+    },
+    {
+      "title": "French Toast with Berries",
+      "category": "breakfast",
+      "image": "https://i.ibb.co.com/Lk6VhSS/break.webp",
+      "rating": 4.6,
+      "price": 6.99
+    },
+    {
+      "title": "Smoothie Bowl",
+      "category": "breakfast",
+      "image": "https://i.ibb.co.com/Lk6VhSS/break.webp",
+      "rating": 4.9,
+      "price": 8.49
+    },
+    {
+      "title": "Grilled Chicken Salad",
+      "category": "lunch",
+      "image": "https://example.com/images/chicken_salad.jpg",
+      "rating": 4.6,
+      "price": 9.99
+    },
+    {
+      "title": "Spaghetti Carbonara",
+      "category": "lunch",
+      "image": "https://i.ibb.co.com/CW7MWw0/2.jpg",
+      "rating": 4.4,
+      "price": 11.49
+    },
+    {
+      "title": "Vegetarian Burrito Bowl",
+      "category": "lunch",
+      "image": "https://i.ibb.co.com/CW7MWw0/2.jpg",
+      "rating": 4.7,
+      "price": 10.29
+    },
+    {
+      "title": "Chicken Wrap",
+      "category": "lunch",
+      "image": "https://i.ibb.co.com/CW7MWw0/2.jpg",
+      "rating": 4.5,
+      "price": 8.99
+    },
+    {
+      "title": "Caesar Salad",
+      "category": "lunch",
+      "image": "https://i.ibb.co.com/CW7MWw0/2.jpg",
+      "rating": 4.3,
+      "price": 9.49
+    },
+    {
+      "title": "Grilled Salmon with Vegetables",
+      "category": "dinner",
+      "image": "https://i.ibb.co.com/mzkcH36/din.jpg",
+      "rating": 4.9,
+      "price": 14.99
+    },
+    {
+      "title": "Beef Steak with Mashed Potatoes",
+      "category": "dinner",
+      "image": "https://i.ibb.co.com/mzkcH36/din.jpg",
+      "rating": 4.8,
+      "price": 18.49
+    },
+    {
+      "title": "Vegetable Stir-Fry with Tofu",
+      "category": "dinner",
+      "image": "https://i.ibb.co.com/mzkcH36/din.jpg",
+      "rating": 4.7,
+      "price": 12.29
+    },
+    {
+      "title": "Chicken Alfredo Pasta",
+      "category": "dinner",
+      "image": "https://i.ibb.co.com/mzkcH36/din.jpg",
+      "rating": 4.6,
+      "price": 13.49
+    },
+    {
+      "title": "Margarita Pizza",
+      "category": "dinner",
+      "image": "https://i.ibb.co.com/mzkcH36/din.jpg",
+      "rating": 4.5,
+      "price": 11.99
+    },
+    {
+      "title": "Bacon and Egg Sandwich",
+      "category": "breakfast",
+      "image": "https://i.ibb.co.com/Lk6VhSS/break.webp",
+      "rating": 4.8,
+      "price": 5.49
+    },
+    {
+      "title": "Chicken Caesar Wrap",
+      "category": "lunch",
+      "image": "https://i.ibb.co.com/CW7MWw0/2.jpg",
+      "rating": 4.6,
+      "price": 8.99
+    },
+    {
+      "title": "Shrimp Scampi",
+      "category": "dinner",
+      "image": "https://i.ibb.co.com/mzkcH36/din.jpg",
+      "rating": 4.7,
+      "price": 15.99
+    },
+    {
+      "title": "Breakfast Burrito",
+      "category": "breakfast",
+      "image": "https://i.ibb.co.com/Lk6VhSS/break.webp",
+      "rating": 4.5,
+      "price": 6.99
+    },
+    {
+      "title": "Fish Tacos",
+      "category": "lunch",
+      "image": "https://i.ibb.co.com/CW7MWw0/2.jpg",
+      "rating": 4.4,
+      "price": 9.99
+    }
+  ]

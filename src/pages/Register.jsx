@@ -18,27 +18,30 @@ const Register = () => {
     const { register, handleSubmit,reset} = useForm()
     const onSubmit = (data) => {
         CreateUser(data.email, data.password)
-            .then(() => {
-                updateprofile(data.name, data.photoURL)
-                    .then( () => {
-                        const user = {
-                            name: data.name,
-                            photoURL:data.photoURL,
-                            email: data.email,
-                            password:data.password
+            .then((res) => {
+                updateprofile({
+                    displayName: data.name,
+                    photoURL: data.photoURL
+                }).then(() => {
+                    const user = {
+                        name: data.name,
+                        photoURL: data.photoURL,
+                        email: data.email,
+                        password: data.password,
+                    };
+                    axiosPublic.post('/users', user).then((res) => {
+                        if (res.data.insertedId) {
+                            reset();
+                            navigate('/');
+                            toast.success('Registration Successful');
                         }
-                        axiosPublic.post('/users',user)
-                            .then(res => {
-                                if (res.data.insertedId) {
-                                    reset()
-                                    navigate('/')
-                                    toast.success('Registration Successfull')
-                            }
-                        })
-
-                })
-        })
-    }
+                    });
+                });
+            })
+            .catch((error) => {
+                toast.error(error.message);
+            });
+    };
 
     const handleGoogle = () => {
         singinWithGoogle()
@@ -88,7 +91,7 @@ const Register = () => {
                             <input
                                 type="url"
                                 placeholder="Photo URL"
-                                {...register("PhotoURL",{ required: true })}
+                                {...register("photoURL", { required: true })}
                                 className="w-full bg-transparent focus:outline-none text-gray-700"
                             />
                         </div>

@@ -62,7 +62,7 @@ const Navbar = () => {
                             <div className="w-10 rounded-full">
                                 <img
                                     alt="Tailwind CSS Navbar component"
-                                    src="" />
+                                    src={user?.photoURL} />
                             </div>
                         </div>
                         <ul
@@ -76,7 +76,7 @@ const Navbar = () => {
                             <li><a>Dashboard</a></li>
                             <li onClick={handlelogOut} ><a>Logout</a></li>
                         </ul>
-                    </div> : <Link to='/register' className="px-4 py-2 rounded-lg bg-gradient-to-r from-purple-500 to-pink-500">Join Us</Link>
+                    </div> : <Link to='/register' className="px-4 py-2 rounded-lg bg-purple-400">Join Us</Link>
                 }
            </div>
         </div>
