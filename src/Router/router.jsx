@@ -43,7 +43,7 @@ const router = createBrowserRouter([
                 element:<UpcomingMeals/>
             },
             {
-                path: '/chekout',
+                path: '/checkout/:id',
                 element: <Privateroute>
                     <CheckOut/>
                 </Privateroute>

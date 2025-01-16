@@ -1,0 +1,44 @@
+[
+    {
+        "id": 1,
+        "title": "Silver",
+        "price": "$5",
+        "description": "per month",
+        "bgColor": "bg-gray-400",
+        "features": [
+            "Breakfast only",
+            "Limited menu options",
+            "Weekdays only",
+            "1 drink per meal",
+            "Basic seating area"
+        ]
+    },
+    {
+        "id": 2,
+        "title": "Gold",
+        "price": "$15",
+        "description": "per month",
+        "bgColor": "bg-yellow-400",
+        "features": [
+            "Breakfast and dinner",
+            "Expanded menu options",
+            "7 days a week",
+            "2 drinks per meal",
+            "Access to air-conditioned dining"
+        ]
+    },
+    {
+        "id": 3,
+        "title": "Platinum",
+        "price": "$35",
+        "description": "per month",
+        "bgColor": "bg-gray-300",
+        "features": [
+            "All three meals (breakfast, lunch, dinner)",
+            "Premium menu options with special dishes",
+            "7 days a week",
+            "Unlimited drinks per meal",
+            "Access to exclusive lounge with additional amenities"
+        ]
+    }
+]
