@@ -14,7 +14,10 @@ const Navbar = () => {
     const links = <>
         <NavLink to='/' className='text-lg md:mr-3'>Home</NavLink>
         <NavLink to='/meals' className='text-lg md:mr-3'>Meals</NavLink>
-        <NavLink className='text-lg md:mr-3'>Upcoming Meals</NavLink>
+        <NavLink to='/upcoming' className='text-lg md:mr-3'>Upcoming Meals</NavLink>
+        {
+            user && <NavLink to='/Checkout' className='text-lg md:mr-3'>Checkout</NavLink>
+        }
     </>
 
     return (

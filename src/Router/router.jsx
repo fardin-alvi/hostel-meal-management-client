@@ -8,6 +8,9 @@ import Login from "../pages/Login";
 import Home from "../pages/Home/Home";
 import Mealdetials from "../component/Mealdetials";
 import Meals from "../pages/Meals";
+import UpcomingMeals from "../pages/UpcomingMeals";
+import Privateroute from "./Privateroute";
+import CheckOut from "../pages/CheckOut";
 
 const router = createBrowserRouter([
     {
@@ -34,6 +37,16 @@ const router = createBrowserRouter([
             {
                 path: 'meals',
                 element:<Meals/>
+            },
+            {
+                path: '/upcoming',
+                element:<UpcomingMeals/>
+            },
+            {
+                path: '/chekout',
+                element: <Privateroute>
+                    <CheckOut/>
+                </Privateroute>
             }
         ]
     },
