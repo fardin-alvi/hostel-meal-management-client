@@ -11,6 +11,7 @@ import Meals from "../pages/Meals";
 import UpcomingMeals from "../pages/UpcomingMeals";
 import Privateroute from "./Privateroute";
 import CheckOut from "../pages/CheckOut";
+import Payment from "../component/Payment";
 
 const router = createBrowserRouter([
     {
@@ -19,15 +20,15 @@ const router = createBrowserRouter([
         children: [
             {
                 path: '/',
-                element:<Home/>
+                element: <Home />
             },
             {
                 path: 'register',
-                element:<Register/>
+                element: <Register />
             },
             {
                 path: 'login',
-                element:<Login/>
+                element: <Login />
             },
             {
                 path: 'meal/:id',
@@ -36,17 +37,21 @@ const router = createBrowserRouter([
             },
             {
                 path: 'meals',
-                element:<Meals/>
+                element: <Meals />
             },
             {
                 path: '/upcoming',
-                element:<UpcomingMeals/>
+                element: <UpcomingMeals />
             },
             {
                 path: '/checkout/:id',
                 element: <Privateroute>
-                    <CheckOut/>
-                </Privateroute>
+                    <Payment />
+                </Privateroute>,
+                loader: ({ params }) => fetch(`http://localhost:5000/package/${params.id}`)
+                // element: <Privateroute>
+                //     <Payment />
+                // </Privateroute>
             }
         ]
     },

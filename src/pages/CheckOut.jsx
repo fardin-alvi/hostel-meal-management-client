@@ -1,32 +1,95 @@
+import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { FaCreditCard, FaPaypal } from "react-icons/fa";
+import toast from 'react-hot-toast';
 import { Bars } from 'react-loader-spinner';
 import { useParams } from 'react-router-dom';
+import useAxiosSecure from '../hooks/useAxiosSecure';
+import { useQuery } from '@tanstack/react-query';
 
 const CheckOut = () => {
     const { id } = useParams();
-    const [plan, setPlan] = useState(null);
-    const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [packages, setPackage] = useState([])
+    const stripe = useStripe()
+    const elements = useElements();
+    const [clientSecret, setClientSecret] = useState("");
+    const axiosSecure = useAxiosSecure();
 
     useEffect(() => {
-        const findPlans = async () => {
-            try {
-                const res = await axios.get('/packages.json');
-                const filter = res.data.find(p => p.id.toString() === id);
-                setPlan(filter);
-            } catch (err) {
-                console.error("Error is", err);
-                setError(err.message || "An error occurred while fetching the plan.");
-            } finally {
-                setLoading(false);
-            }
-        };
-        findPlans();
-    }, [id]);
+        axiosSecure.post('/payment-intent-method', { price: packages?.price})
+            .then(res => {
+                setClientSecret(res.data.clientSecret)
+            })
+    }, [])
 
-    if (loading) return <div>
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        if (!stripe || !elements) {
+            return;
+        }
+
+        const card = elements.getElement(CardElement);
+        if (!card) {
+            return;
+        }
+
+        try {
+            const { error, paymentMethod } = await stripe.createPaymentMethod({
+                type: 'card',
+                card
+            });
+
+            if (error) {
+                setError('Payment failed:', error.message);
+            } else {
+                setError('')
+            }
+
+            const { paymentIntent, error: ConfirmError } = await stripe.confirmCardPayment(clientSecret, {
+                payment_method: {
+                    card: card,
+                    billing_details: {
+                        email: user.email || Annonyms,
+                        name: user.displayName || Annonyms,
+                        photoURL: user.photoURL || none
+                    }
+                }
+            })
+            if (ConfirmError) {
+                console.log('error', ConfirmError);
+
+            } else {
+                if (paymentIntent.status === 'succeeded') {
+                    setId(paymentIntent.id)
+                }
+                const paymentInfo = {
+                    email: user.email,
+                    id: paymentIntent.id,
+                    price: totalprice,
+                    date: new Date,
+                }
+                const res = await axiosSecure.post('/payments', paymentInfo)
+            }
+        } catch (err) {
+            setError('Error during payment:', err);
+        }
+    };
+
+
+    const { data: plan, isLoading } = useQuery({
+        queryKey: ['plan', id],
+        queryFn: async () => {
+            const res = await axiosSecure.get(`/package/${id}`)
+            setPackage(res.data)
+            return res.data
+        },
+        enabled: !!id
+    })
+
+
+    if (isLoading) return <div>
         <Bars
             height="80"
             width="80"
@@ -37,7 +100,6 @@ const CheckOut = () => {
             visible={true}
         />
     </div>;
-    if (error) return <div>Error: {error}</div>;
 
     return (
         <div className="flex justify-center items-center min-h-screen bg-gradient-to-r from-purple-50 to-pink-50">
@@ -50,8 +112,8 @@ const CheckOut = () => {
                 </div>
                 <div className="bg-gradient-to-r from-purple-500 to-indigo-400 text-white rounded-lg p-4 mb-6">
                     <div className='flex justify-between'>
-                        <h3 className="text-2xl font-bold">{plan.title}</h3>
-                        <p className="text-lg font-semibold">{plan.price}/{plan.description}</p>
+                        <h3 className="text-2xl font-bold">{plan?.title}</h3>
+                        <p className="text-lg font-semibold">{plan?.price}/{plan?.description}</p>
                     </div>
                     <ul className="mt-4 space-y-2 text-sm">
                         {
@@ -61,12 +123,41 @@ const CheckOut = () => {
                 </div>
                 {/* Payment Methods */}
                 <div className="mb-6">
-                    {/* Add Stripe card element or other payment options */}
+                    <form
+                        onSubmit={handleSubmit}
+                        className="max-w-lg mx-auto flex flex-col gap-6  bg-white  rounded-md"
+                    >
+                        <div
+                            className="p-3 border border-gray-300 rounded-md focus-within:border-indigo-600 focus-within:bg-gray-50"
+                        >
+                            <CardElement
+                                options={{
+                                    style: {
+                                        base: {
+                                            iconColor: '#666EE8',
+                                            color: '#31325F',
+                                            fontSize: '16px',
+                                            fontSmoothing: 'antialiased',
+                                            '::placeholder': {
+                                                color: '#CFD7E0',
+                                            },
+                                        },
+                                        invalid: {
+                                            color: '#e5424d',
+                                            ':focus': {
+                                                color: '#e5424d',
+                                            },
+                                        },
+                                    },
+                                }}
+                            />
+                        </div>
+                        <button className="w-full bg-purple-600 text-white py-3 rounded-lg text-center font-bold hover:bg-purple-700 transition">
+                            Pay {plan.price} →
+                        </button>
+                        {/* <p className='text-red-500 text-center'>{error}</p> */}
+                    </form>
                 </div>
-
-                <button className="w-full bg-purple-600 text-white py-3 rounded-lg text-center font-bold hover:bg-purple-700 transition">
-                    Continue →
-                </button>
             </div>
         </div>
     );

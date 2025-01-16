@@ -3,14 +3,15 @@ import { FaArrowRightFromBracket } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import axios from "axios";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const Package = () => {
-    const[plans,setPlans]= useState([])
+    const [plans, setPlans] = useState([])
 
     useEffect(() => {
         const findPlans = async () => {
             try {
-                const res = await axios.get('packages.json');
+                const res = await axios.get('http://localhost:5000/package');
                 console.log(res.data);
                 setPlans(res.data);
             } catch (error) {
@@ -32,7 +33,7 @@ const Package = () => {
             <div className="mt-10 flex items-center justify-center">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8 p-6">
                     {plans?.map((plan, index) => (
-                        <Link to={`/checkout/${plan.id}`}
+                        <Link to={`/checkout/${plan._id}`}
                             key={index}
                             className={`relative ${plan.bgColor} text-gray-600 py-16 px-6 flex flex-col items-center justify-center rounded-lg shadow-lg`}
                         >
