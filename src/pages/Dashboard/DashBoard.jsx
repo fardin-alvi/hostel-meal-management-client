@@ -28,7 +28,7 @@ const DashBoard = () => {
                     {
                         isAdmin ? <>
                             <li className='text-lg'>
-                                <Link to='/dashboard/myprofile'>
+                                <Link to='/dashboard/adminprofile'>
                                     <ImProfile />
                                     Admin Profile
                                 </Link>

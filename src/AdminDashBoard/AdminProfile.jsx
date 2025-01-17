@@ -1,12 +1,10 @@
 import React from 'react';
 import useAuth from '../hooks/useAuth';
-import usePayments from '../hooks/usePayments';
+import { FaEdit, FaMapMarkerAlt, FaSignOutAlt, FaUpload } from 'react-icons/fa';
 import ProfileRow from '../component/ProfileRow';
 
-const Myprofile = () => {
-    const { user } = useAuth();
-    const { payments } = usePayments();
-
+const AdminProfile = () => {
+    const {user}= useAuth()
     return (
         <div className="flex justify-center flex-col items-center p-4">
             {/* Profile Section */}
@@ -28,10 +26,10 @@ const Myprofile = () => {
                 {/* Profile Details */}
                 <div className="mt-6 space-y-4">
                     <ProfileRow label="Email" value={user.email} />
-                    <ProfileRow
+                    {/* <ProfileRow
                         label="Subscription Type"
                         value={payments?.title || 'Unavailable'}
-                    />
+                    /> */}
                     <ProfileRow label="Time Zone" value={user.metadata.lastSignInTime} />
                 </div>
             </div>
@@ -39,4 +37,4 @@ const Myprofile = () => {
     );
 };
 
-export default Myprofile;
+export default AdminProfile;
