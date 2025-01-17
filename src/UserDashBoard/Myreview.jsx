@@ -1,64 +1,55 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 import useAxiosSecure from '../hooks/useAxiosSecure';
-import toast from 'react-hot-toast';
+import useAuth from '../hooks/useAuth';
 
-const Mealrequested = () => {
+const Myreview = () => {
+    const {user}= useAuth()
     const axiosSecure = useAxiosSecure()
 
-    const { data: mealRequest = [],refetch } = useQuery({
-        queryKey: ['mealrequest'],
+
+    const { data: reviews =[] } = useQuery({
+        queryKey: ['reviews'],
         queryFn: async () => {
-            const res = await axiosSecure.get('/mealrequest')
+            const res = await axiosSecure.get(`/reviews/${user?.email}`)
+            console.log(res.data);
             return res.data
         }
     })
-
-    const handledelete = (id) => {
-        axiosSecure.delete(`/mealreq/${id}`)
-            .then(res => {
-                console.log(res.data);
-                if (res.data.deletedCount > 0) {
-                    refetch()
-                    toast.success('Deleted Requested Meal')
-                }
-        })
-    }
-
     return (
         <div className='bg-gradient-to-r from-purple-50 to-pink-50 mx-20 pt-5'>
             <div className="overflow-x-auto py-2">
                 <table className="table max-w-2xl mx-auto rounded">
                     <thead className='bg-white text-center'>
                         <tr>
-                            <th>title</th>
-                            <th>Email</th>
+                            <th>Title</th>
                             <th>Likes</th>
-                            <th>Review Count</th>
-                            <th>Status</th>
+                            <th>Review</th>
+                            <th>Action</th>
+                            <th>Action</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody className='text-center'>
                         {
-                            mealRequest?.map((request) => <tr key={request._id}>
+                            reviews?.map((review) => <tr key={review._id}>
                                 <td>
-                                    {request.title}
+                                    {review.title}
                                 </td>
                                 <td>
-                                    {request.requested_user}
+                                   {review.like}
                                 </td>
                                 <td>
-                                    {request.likes}
+                                   {review?.review}
                                 </td>
                                 <td>
-                                    {request.review_count}
+                                    <button className='btn-sm bg-purple-400 px-4 rounded-xl'>Edit</button>
                                 </td>
                                 <td>
-                                    {request.status}
+                                    <button className='btn-sm bg-purple-400 px-4 rounded-xl'>Delete</button>
                                 </td>
                                 <td>
-                                    <button onClick={() => handledelete(request._id)} className='btn-sm bg-purple-400 px-4 rounded-xl'>Cencel</button>
+                                    <button className='btn-sm bg-purple-400 px-4 rounded-xl'>View Meal</button>
                                 </td>
                             </tr>)
                         }
@@ -69,4 +60,4 @@ const Mealrequested = () => {
     );
 };
 
-export default Mealrequested;
+export default Myreview;

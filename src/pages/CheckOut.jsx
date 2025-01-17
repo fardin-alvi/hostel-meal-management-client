@@ -6,10 +6,13 @@ import { Bars } from 'react-loader-spinner';
 import { useParams } from 'react-router-dom';
 import useAxiosSecure from '../hooks/useAxiosSecure';
 import { useQuery } from '@tanstack/react-query';
+import useAuth from '../hooks/useAuth';
 
 const CheckOut = () => {
     const { id } = useParams();
+    const {user} = useAuth()
     const [error, setError] = useState('');
+    const [ids,setId]= useState()
     const stripe = useStripe()
     const elements = useElements();
     const [clientSecret, setClientSecret] = useState("");
@@ -26,13 +29,15 @@ const CheckOut = () => {
     
     console.log(plan);
 
-    // useEffect(async () => {
-    //     await axiosSecure.post('/payment-intent-method', { price:plan?.price})
-    //         .then(res => {
-    //             console.log(res.data.clientSecret);
-    //             setClientSecret(res.data?.clientSecret)
-    //         })
-    // }, [axiosSecure,plan?.price])
+    useEffect(() => {
+        if (plan?.price) {
+            axiosSecure.post('/payment-intent-method', { price: plan?.price })
+                .then(res => {
+                    console.log(res.data.clientSecret);
+                    setClientSecret(res.data?.clientSecret)
+                })
+        }
+    }, [plan])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -56,6 +61,39 @@ const CheckOut = () => {
         } else {
             console.log('payment methood', paymentMethod);
             setError('')
+        }
+
+        const { paymentIntent, error: ConfirmError } = await stripe.confirmCardPayment(clientSecret, {
+            payment_method: {
+                card: card,
+                billing_details: {
+                    email: user.email || 'Annonyms',
+                    name: user.displayName || 'Annonyms',
+                }
+            }
+        })
+        if (ConfirmError) {
+            console.log('error', ConfirmError);
+
+        } else {
+            console.log(paymentIntent);
+            if (paymentIntent.status === 'succeeded') {
+                setId(paymentIntent.id)
+                card.clear();
+            }
+            const paymentInfo = {
+                email: user.email,
+                id: paymentIntent.id,
+                price: plan.price,
+                date: new Date,
+                packageId: plan._id,
+                title:plan.title,
+                status: 'pending'
+            }
+            const res = await axiosSecure.post('/payments', paymentInfo)
+            if (res.data.insertedId) {
+                toast.success('Payment Send')
+            }
         }
 
     };
@@ -126,7 +164,7 @@ const CheckOut = () => {
                                 }}
                             />
                         </div>
-                        <button className="w-full bg-purple-600 text-white py-3 rounded-lg text-center font-bold hover:bg-purple-700 transition">
+                        <button disabled={!stripe || !clientSecret} className="w-full bg-purple-600 text-white py-3 rounded-lg text-center font-bold hover:bg-purple-700 transition">
                             Pay {plan.price} →
                         </button>
                         <p className='text-red-500 text-center'>{error}</p>

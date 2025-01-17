@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLoaderData, useNavigate } from 'react-router-dom';
 import { FaDiagnoses, FaMapMarkerAlt, FaRegStar, FaStar, FaStarHalfAlt } from "react-icons/fa";
 import { MdOutlineTimeline } from "react-icons/md";
@@ -6,17 +6,28 @@ import { BiSolidLike } from "react-icons/bi";
 import useAuth from '../hooks/useAuth';
 import useAxiosSecure from '../hooks/useAxiosSecure';
 import toast from 'react-hot-toast';
-import { useQueries, useQuery } from '@tanstack/react-query';
 import useAxiosPublic from '../hooks/useAxiosPublic';
 
 const Mealdetials = () => {
     const meals = useLoaderData();
-    const { image, title, price, rating, distributor, postTime, description, ingredients, _id,likes } = meals;
-    const { user } = useAuth()
+    const { image, title, price, rating, distributor, postTime, description, ingredients, _id, likes } = meals;
+    const { user } = useAuth();
     const [review, setReview] = useState('');
-    const axiosSecure = useAxiosSecure()
-    const axiosPublic = useAxiosPublic()
-    const navigate = useNavigate()
+    const [reviews, setReviews] = useState([]);
+    const axiosSecure = useAxiosSecure();
+    const axiosPublic = useAxiosPublic();
+    const navigate = useNavigate();
+
+    useEffect(() => {
+
+        axiosPublic.get(`/reviews/${_id}`)
+            .then(res => {
+                setReviews(res.data);
+            })
+            .catch(error => {
+                console.error('Error fetching reviews:', error);
+            });
+    }, [_id])
 
     const renderStar = (rating) => {
         const fullstar = Math.floor(rating);
@@ -34,26 +45,30 @@ const Mealdetials = () => {
 
     const handleReviewSubmit = (e) => {
         e.preventDefault();
-        const reviews = {
+        const newReview = {
+            mealId: _id,
+            title: title,
+            likes:likes,
             name: user.displayName,
             email: user.email,
             photoURL: user.photoURL,
-            review: review,
+            review: e.target.review.value,
+            time: new Date().toLocaleString(),
         };
-        setReview("");
-        try {
-            axiosSecure.post('/review', reviews)
-                .then(res => {
-                    console.log(res.data);
-                    setReview(res.data)
-                    toast.success('Review Added')
-                    setReview('')
-                })
 
-        } catch (error) {
-            console.log(error);
-        }
+        setReviews(prevReviews => [...prevReviews, newReview]);
 
+        axiosSecure.post('/review', newReview)
+            .then(res => {
+                console.log('Review added:', res.data);
+                toast.success('Review Added');
+            })
+            .catch(error => {
+                console.error('Error posting review:', error);
+                toast.error('Failed to add review');
+            });
+
+        e.target.reset();
     };
 
     const handlelikes = async () => {
@@ -63,35 +78,24 @@ const Mealdetials = () => {
                 toast.success('Like added!');
             }
         } else {
-            navigate('/login')
+            navigate('/login');
         }
-    }
+    };
 
     const handleMealRequest = (meal) => {
-
-        axiosSecure.post('/mealrequest', { 
+        axiosSecure.post('/mealrequest', {
             title: meal.title,
             likes: meal.likes || 0,
             requested_user: user.email,
             review_count: review.length,
-            status:'pending'
-         })
+            status: 'pending',
+        })
             .then(res => {
                 if (res.data.insertedId) {
-                    toast.success('Meal Requested Done..')
+                    toast.success('Meal Requested Done..');
                 }
-        })
-
-    }
-
-    const { data: reviews = [] } = useQuery({
-        queryKey: ['review'],
-        queryFn: async () => {
-            const res = await axiosPublic.get('/reviews')
-            return res.data
-        }
-    })
-    console.log(reviews);
+            });
+    };
 
     return (
         <div className="min-h-screen bg-gradient-to-r from-purple-50 to-pink-50">
@@ -137,7 +141,7 @@ const Mealdetials = () => {
                         {ingredients}
                     </p>
                     <div className='mt-3 flex gap-x-3'>
-                        <button onClick={()=>handleMealRequest(meals)} className="flex items-center bg-purple-400 py-2 px-3 rounded-lg">
+                        <button onClick={() => handleMealRequest(meals)} className="flex items-center bg-purple-400 py-2 px-3 rounded-lg">
                             Push for Meal
                         </button>
                         <button onClick={handlelikes} className="flex items-center bg-purple-400 py-2 px-3 rounded-lg">
@@ -150,9 +154,9 @@ const Mealdetials = () => {
                         <textarea
                             className="w-full p-3 rounded-lg bg-white"
                             rows="3"
+                            required
                             placeholder="Write your review here..."
-                            value={review}
-                            onChange={(e) => setReview(e.target.value)}
+                            name='review'
                         ></textarea>
                         <button
                             type="submit"
@@ -162,13 +166,16 @@ const Mealdetials = () => {
                         </button>
                     </form>
                     <h2 className="text-lg font-semibold mb-3">Reviews ({reviews.length})</h2>
-                    {reviews.map((review) => (
+                    {reviews?.map((review) => (
                         <div key={review._id} className="bg-bae-100 border border-gray-300 p-4 rounded-lg mb-3">
-                            <div className='flex items-start gap-x-3'>
+                            <div className='flex items-center justify-start gap-x-3'>
                                 <img className='rounded-full w-10 h-10' src={review.photoURL} alt="" />
-                                <h3 className="font-semibold">{review.name}</h3>
+                                <div>
+                                    <h3 className="font-semibold">{review.name}</h3>
+                                    <p className=" text-sm">{review.time}</p>
+                                </div>
                             </div>
-                            <p className="text-gray-300 text-sm">{review.time}</p>
+                            
                             <p className="text-gray-400 mt-2">{review.review}</p>
                         </div>
                     ))}

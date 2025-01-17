@@ -32,13 +32,13 @@ const DashBoard = () => {
                         </NavLink>
                     </li>
                     <li className='text-lg'>
-                        <NavLink to='/'>
+                        <NavLink to='/dashboard/myreview'>
                             <MdOutlineRateReview />
                             My Reviews
                         </NavLink>
                     </li>
                     <li className='text-lg'>
-                        <NavLink to='/'>
+                        <NavLink to='/dashboard/payment-history'>
                             <MdOutlinePayments />
                             Payment History
                         </NavLink>

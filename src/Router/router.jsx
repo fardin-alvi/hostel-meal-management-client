@@ -15,6 +15,8 @@ import Payment from "../component/Payment";
 import DashBoard from "../pages/Dashboard/DashBoard";
 import Myprofile from "../UserDashBoard/Myprofile";
 import Mealrequested from "../UserDashBoard/Mealrequested";
+import Myreview from "../UserDashBoard/Myreview";
+import PaymentHistory from "../UserDashBoard/PaymentHistory";
 
 const router = createBrowserRouter([
     {
@@ -66,6 +68,14 @@ const router = createBrowserRouter([
             {
                 path: 'mealrequest',
                 element: <Mealrequested />
+            },
+            {
+                path: 'myreview',
+                element:<Myreview/>
+            },
+            {
+                path: 'payment-history',
+                element:<PaymentHistory/>
             }
 
         ]

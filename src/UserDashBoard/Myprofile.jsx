@@ -1,21 +1,13 @@
 import React from 'react';
 import useAuth from '../hooks/useAuth';
 import { FaEdit, FaMapMarkerAlt, FaSignOutAlt, FaUpload } from 'react-icons/fa';
+import usePayments from '../hooks/usePayments';
 
 const Myprofile = () => {
     const { user } = useAuth()
-    const users = {
-        name: 'Rachel Derek',
-        role: 'UI/UX Designer @Spotify',
-        location: 'Sylhet, Bangladesh',
-        profilePic: 'https://via.placeholder.com/150',
-        coverPic: 'https://via.placeholder.com/500x200',
-        meetingID: '231-342-3245',
-        email: 'rachel@callme.io',
-        subscriptionType: 'Basic User',
-        timeZone: '(GMT+6:00) Astana, Dhaka',
-        language: 'English',
-    };
+    console.log(user);
+    const {payments} = usePayments()
+    console.log(payments);
 
     return (
         <div className=" flex justify-center flex-col items-center p-4">
@@ -44,10 +36,10 @@ const Myprofile = () => {
                     <ProfileRow label="Email" value={user.email}  />
                     <ProfileRow
                         label="Subscription Type"
-                        value={users.subscriptionType}
+                        value={payments?.title}
                         // action={<span className="text-blue-600 cursor-pointer">Upgrade</span>}
                     />
-                    <ProfileRow label="Time Zone" value={users.timeZone}  />
+                    <ProfileRow label="Time Zone" value={user.metadata.lastSignInTime}  />
                     {/* <ProfileRow label="Language" value={users.language}  /> */}
                     {/* <ProfileRow label="Password" value="********"  /> */}
                 </div>
