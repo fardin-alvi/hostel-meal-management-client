@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useParams } from 'react-router-dom';
 import logo from '../../assets/logo.png'
 import useAuth from '../../hooks/useAuth';
 
 const Navbar = () => {
-    const {user,logout} = useAuth()
+    const { user, logout } = useAuth()
     
     const handlelogOut = () => {
         logout().then(() => {
@@ -16,7 +16,9 @@ const Navbar = () => {
         <NavLink to='/meals' className='text-lg md:mr-3'>Meals</NavLink>
         <NavLink to='/upcoming' className='text-lg md:mr-3'>Upcoming Meals</NavLink>
         {
-            user && <NavLink to='/Checkout/1' className='text-lg md:mr-3'>Checkout</NavLink>
+            user && <>
+                <NavLink to='/dashboard' className='text-lg md:mr-3'>Dashboard</NavLink>
+                </>
         }
     </>
 

@@ -9,19 +9,30 @@ import { useQuery } from '@tanstack/react-query';
 
 const CheckOut = () => {
     const { id } = useParams();
-    const [error, setError] = useState(null);
-    const [packages, setPackage] = useState([])
+    const [error, setError] = useState('');
     const stripe = useStripe()
     const elements = useElements();
     const [clientSecret, setClientSecret] = useState("");
     const axiosSecure = useAxiosSecure();
 
-    useEffect(() => {
-        axiosSecure.post('/payment-intent-method', { price: packages?.price})
-            .then(res => {
-                setClientSecret(res.data.clientSecret)
-            })
-    }, [])
+    const { data: plan, isLoading } = useQuery({
+        queryKey: ['plan', id],
+        queryFn: async () => {
+            const res = await axiosSecure.get(`/package/${id}`)
+            return res.data
+        },
+        enabled: !!id
+    })
+    
+    console.log(plan);
+
+    // useEffect(async () => {
+    //     await axiosSecure.post('/payment-intent-method', { price:plan?.price})
+    //         .then(res => {
+    //             console.log(res.data.clientSecret);
+    //             setClientSecret(res.data?.clientSecret)
+    //         })
+    // }, [axiosSecure,plan?.price])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -35,58 +46,21 @@ const CheckOut = () => {
             return;
         }
 
-        try {
-            const { error, paymentMethod } = await stripe.createPaymentMethod({
-                type: 'card',
-                card
-            });
+        const { error, paymentMethod } = await stripe.createPaymentMethod({
+            type: 'card',
+            card
+        });
 
-            if (error) {
-                setError('Payment failed:', error.message);
-            } else {
-                setError('')
-            }
-
-            const { paymentIntent, error: ConfirmError } = await stripe.confirmCardPayment(clientSecret, {
-                payment_method: {
-                    card: card,
-                    billing_details: {
-                        email: user.email || Annonyms,
-                        name: user.displayName || Annonyms,
-                        photoURL: user.photoURL || none
-                    }
-                }
-            })
-            if (ConfirmError) {
-                console.log('error', ConfirmError);
-
-            } else {
-                if (paymentIntent.status === 'succeeded') {
-                    setId(paymentIntent.id)
-                }
-                const paymentInfo = {
-                    email: user.email,
-                    id: paymentIntent.id,
-                    price: totalprice,
-                    date: new Date,
-                }
-                const res = await axiosSecure.post('/payments', paymentInfo)
-            }
-        } catch (err) {
-            setError('Error during payment:', err);
+        if (error) {
+            setError('Payment failed:', error.message);
+        } else {
+            console.log('payment methood', paymentMethod);
+            setError('')
         }
+
     };
 
 
-    const { data: plan, isLoading } = useQuery({
-        queryKey: ['plan', id],
-        queryFn: async () => {
-            const res = await axiosSecure.get(`/package/${id}`)
-            setPackage(res.data)
-            return res.data
-        },
-        enabled: !!id
-    })
 
 
     if (isLoading) return <div>
@@ -155,7 +129,7 @@ const CheckOut = () => {
                         <button className="w-full bg-purple-600 text-white py-3 rounded-lg text-center font-bold hover:bg-purple-700 transition">
                             Pay {plan.price} →
                         </button>
-                        {/* <p className='text-red-500 text-center'>{error}</p> */}
+                        <p className='text-red-500 text-center'>{error}</p>
                     </form>
                 </div>
             </div>

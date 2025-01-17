@@ -13,7 +13,6 @@ const Mealdetials = () => {
     const meals = useLoaderData();
     const { image, title, price, rating, distributor, postTime, description, ingredients, _id,likes } = meals;
     const { user } = useAuth()
-    console.log(user);
     const [review, setReview] = useState('');
     const axiosSecure = useAxiosSecure()
     const axiosPublic = useAxiosPublic()
@@ -66,6 +65,23 @@ const Mealdetials = () => {
         } else {
             navigate('/login')
         }
+    }
+
+    const handleMealRequest = (meal) => {
+
+        axiosSecure.post('/mealrequest', { 
+            title: meal.title,
+            likes: meal.likes || 0,
+            requested_user: user.email,
+            review_count: review.length,
+            status:'pending'
+         })
+            .then(res => {
+                if (res.data.insertedId) {
+                    toast.success('Meal Requested Done..')
+                }
+        })
+
     }
 
     const { data: reviews = [] } = useQuery({
@@ -121,7 +137,7 @@ const Mealdetials = () => {
                         {ingredients}
                     </p>
                     <div className='mt-3 flex gap-x-3'>
-                        <button className="flex items-center bg-purple-400 py-2 px-3 rounded-lg">
+                        <button onClick={()=>handleMealRequest(meals)} className="flex items-center bg-purple-400 py-2 px-3 rounded-lg">
                             Push for Meal
                         </button>
                         <button onClick={handlelikes} className="flex items-center bg-purple-400 py-2 px-3 rounded-lg">

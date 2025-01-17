@@ -12,6 +12,9 @@ import UpcomingMeals from "../pages/UpcomingMeals";
 import Privateroute from "./Privateroute";
 import CheckOut from "../pages/CheckOut";
 import Payment from "../component/Payment";
+import DashBoard from "../pages/Dashboard/DashBoard";
+import Myprofile from "../UserDashBoard/Myprofile";
+import Mealrequested from "../UserDashBoard/Mealrequested";
 
 const router = createBrowserRouter([
     {
@@ -44,16 +47,28 @@ const router = createBrowserRouter([
                 element: <UpcomingMeals />
             },
             {
-                path: '/checkout/:id',
+                path: 'checkout/:id',
                 element: <Privateroute>
                     <Payment />
                 </Privateroute>,
                 loader: ({ params }) => fetch(`http://localhost:5000/package/${params.id}`)
-                // element: <Privateroute>
-                //     <Payment />
-                // </Privateroute>
-            }
+            },
         ]
     },
+    {
+        path: '/dashboard',
+        element: <Privateroute> <DashBoard /></Privateroute>,
+        children: [
+            {
+                path: 'myprofile',
+                element: <Myprofile />
+            },
+            {
+                path: 'mealrequest',
+                element: <Mealrequested />
+            }
+
+        ]
+    }
 ]);
 export default router;
