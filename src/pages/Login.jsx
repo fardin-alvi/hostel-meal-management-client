@@ -44,7 +44,7 @@ const Login = () => {
             })
     }
     return (
-        <div className="flex flex-col md:flex-row items-center justify-center py-16 bg-gradient-to-r from-purple-500 to-pink-500 min-h-screen">
+        <div className="flex flex-col md:flex-row items-center justify-center py-16 bg-gradient-to-r from-purple-400 to-pink-400 min-h-screen">
             <div className="hidden md:block md:w-2/4">
                 <Lottie animationData={lottiefile} loop={true} />
             </div>

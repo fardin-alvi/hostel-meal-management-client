@@ -5,7 +5,7 @@ import useAuth from '../../hooks/useAuth';
 
 const Navbar = () => {
     const { user, logout } = useAuth()
-    
+
     const handlelogOut = () => {
         logout().then(() => {
         }).catch(err => console.log(err.message))
@@ -15,11 +15,6 @@ const Navbar = () => {
         <NavLink to='/' className='text-lg md:mr-3'>Home</NavLink>
         <NavLink to='/meals' className='text-lg md:mr-3'>Meals</NavLink>
         <NavLink to='/upcoming' className='text-lg md:mr-3'>Upcoming Meals</NavLink>
-        {
-            user && <>
-                <NavLink to='/dashboard' className='text-lg md:mr-3'>Dashboard</NavLink>
-                </>
-        }
     </>
 
     return (
@@ -73,17 +68,20 @@ const Navbar = () => {
                         <ul
                             tabIndex={0}
                             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
-                            <li>
-                                <a className="justify-between">
-                                    Profile
-                                </a>
-                            </li>
-                            <li><a>Dashboard</a></li>
-                            <li onClick={handlelogOut} ><a>Logout</a></li>
+
+                            <button disabled={true} className="text-start pl-3 cursor-not-allowed ">
+                                {user.displayName}
+                            </button>
+                            {
+                                user && <>
+                                    <li><Link to='/dashboard' className='justify-between'>Dashboard</Link></li>
+                                </>
+                            }
+                            <li onClick={handlelogOut} ><p>Logout</p></li>
                         </ul>
                     </div> : <Link to='/register' className="px-4 py-2 rounded-lg bg-purple-400">Join Us</Link>
                 }
-           </div>
+            </div>
         </div>
     );
 };

@@ -14,6 +14,7 @@ const Mealdetials = () => {
     const { user } = useAuth();
     const [review, setReview] = useState('');
     const [reviews, setReviews] = useState([]);
+    const [like, setLike] = useState(meals.likes || "");
     const axiosSecure = useAxiosSecure();
     const axiosPublic = useAxiosPublic();
     const navigate = useNavigate();
@@ -48,7 +49,7 @@ const Mealdetials = () => {
         const newReview = {
             mealId: _id,
             title: title,
-            likes:likes,
+            likes: likes,
             name: user.displayName,
             email: user.email,
             photoURL: user.photoURL,
@@ -60,7 +61,6 @@ const Mealdetials = () => {
 
         axiosSecure.post('/review', newReview)
             .then(res => {
-                console.log('Review added:', res.data);
                 toast.success('Review Added');
             })
             .catch(error => {
@@ -75,6 +75,7 @@ const Mealdetials = () => {
         if (user) {
             const response = await axiosSecure.patch(`/like/${_id}`);
             if (response.status === 200) {
+                setLike(prev => prev + 1); // Update the likes count locally
                 toast.success('Like added!');
             }
         } else {
@@ -107,9 +108,9 @@ const Mealdetials = () => {
                         className="rounded-lg w-full h-[400px] object-cover"
                     />
                     {
-                        likes && <div className="absolute bottom-2 left-0 bg-black text-white px-3 py-1 rounded flex items-center gap-x-2">
+                        like && <div className="absolute bottom-2 left-0 bg-black text-white px-3 py-1 rounded flex items-center gap-x-2">
                             Reactions
-                            <span>{likes}</span>
+                            <span>{like}</span>
                         </div>
                     }
                 </div>

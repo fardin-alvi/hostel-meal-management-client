@@ -42,7 +42,7 @@ const PaymentHistory = () => {
                     <FaCheckCircle className="text-green-600 mr-2" /> Payment Done Successfully
                 </p>
                 <p className="text-sm text-gray-500 mt-4">
-                    You can Now enjoy the <span className='text-lg text-yellow-800'>{payments.title}</span> plan and the exclusive feature of the package.
+                    You can Now enjoy the <span className='text-lg text-yellow-800'>{payments?.title}</span> plan and the exclusive feature of the package.
                 </p>
             </div>
             <Link to='/dashboard/myprofile' className="mt-6 bg-purple-400 text-white px-6 py-2 rounded-full hover:bg-green-700">
@@ -54,11 +54,11 @@ const PaymentHistory = () => {
                     height={160}
                     width={160}
                 />
-                <div className="text-center">
+                <div className="text-center flex flex-col">
                     <h1 className="text-3xl font-bold text-green-600">No Data Avaibale</h1>
-                    <p className="text-sm text-gray-500 mt-4">
-                        You can Now enjoy the <span className='text-lg text-yellow-800'>{payments.title}</span> plan and the exclusive feature of the package.
-                    </p>
+                    <Link to='/dashboard/myprofile' className="mt-6 bg-purple-400 text-white px-6 py-2 rounded-full hover:bg-green-700">
+                        Take me to my Profile
+                    </Link>
                 </div>
         </div>
     );

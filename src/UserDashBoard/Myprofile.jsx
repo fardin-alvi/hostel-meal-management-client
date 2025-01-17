@@ -36,7 +36,7 @@ const Myprofile = () => {
                     <ProfileRow label="Email" value={user.email}  />
                     <ProfileRow
                         label="Subscription Type"
-                        value={payments?.title}
+                        value={payments?.title || 'Unavailable'}
                         // action={<span className="text-blue-600 cursor-pointer">Upgrade</span>}
                     />
                     <ProfileRow label="Time Zone" value={user.metadata.lastSignInTime}  />
