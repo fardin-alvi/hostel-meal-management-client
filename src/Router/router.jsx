@@ -19,6 +19,7 @@ import Myreview from "../UserDashBoard/Myreview";
 import PaymentHistory from "../UserDashBoard/PaymentHistory";
 import AdminProfile from "../AdminDashBoard/AdminProfile";
 import ManageUsers from "../AdminDashBoard/ManageUsers";
+import Addmeals from "../AdminDashBoard/Addmeals";
 
 const router = createBrowserRouter([
     {
@@ -89,6 +90,10 @@ const router = createBrowserRouter([
             {
                 path: 'manageuser',
                 element:<ManageUsers/>
+            },
+            {
+                path: 'addmeal',
+                element:<Addmeals/>
             }
 
 
