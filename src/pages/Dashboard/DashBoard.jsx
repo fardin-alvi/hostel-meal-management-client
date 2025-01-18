@@ -46,13 +46,13 @@ const DashBoard = () => {
                                 </Link>
                             </li>
                             <li className='text-lg'>
-                                <Link to='/dashboard/myprofile'>
+                                <Link to='/dashboard/allmeals'>
                                     <MdFoodBank />
                                     All Meals
                                 </Link>
                             </li>
                             <li className='text-lg'>
-                                <Link to='/dashboard/myprofile'>
+                                <Link to='/dashboard/allreview'>
                                     <MdOutlineRateReview />
                                     All Reviews
                                 </Link>
