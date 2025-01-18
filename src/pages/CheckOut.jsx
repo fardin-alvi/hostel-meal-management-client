@@ -87,7 +87,7 @@ const CheckOut = () => {
                 price: plan.price,
                 date: new Date,
                 packageId: plan._id,
-                title:plan.title,
+                subscription:plan.title,
                 status: 'pending'
             }
             const res = await axiosSecure.post('/payments', paymentInfo)

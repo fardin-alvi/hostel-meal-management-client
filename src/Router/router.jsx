@@ -18,6 +18,7 @@ import Mealrequested from "../UserDashBoard/Mealrequested";
 import Myreview from "../UserDashBoard/Myreview";
 import PaymentHistory from "../UserDashBoard/PaymentHistory";
 import AdminProfile from "../AdminDashBoard/AdminProfile";
+import ManageUsers from "../AdminDashBoard/ManageUsers";
 
 const router = createBrowserRouter([
     {
@@ -84,6 +85,10 @@ const router = createBrowserRouter([
             {
                 path: 'adminprofile',
                 element:<AdminProfile/>
+            },
+            {
+                path: 'manageuser',
+                element:<ManageUsers/>
             }
 
 

@@ -27,7 +27,7 @@ const Register = () => {
                         name: data.name,
                         photoURL: data.photoURL,
                         email: data.email,
-                        password: data.password,
+                        subscription:'Bronze',
                     };
                     axiosPublic.post('/users', user).then((res) => {
                         if (res.data.insertedId) {

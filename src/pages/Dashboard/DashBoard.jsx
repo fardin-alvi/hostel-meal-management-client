@@ -1,13 +1,13 @@
 import React from 'react';
-import { FaBars, FaHome, } from 'react-icons/fa';
-import { MdFoodBank, MdOutlinePayments, MdOutlineRateReview, MdPayments, MdUpcoming } from "react-icons/md";
-import { FaMessage, FaShop } from 'react-icons/fa6';
+import {FaHome, } from 'react-icons/fa';
+import { MdFoodBank, MdOutlinePayments, MdOutlineRateReview, MdUpcoming } from "react-icons/md";
+import { FaMessage } from 'react-icons/fa6';
+import { RiApps2AddFill } from "react-icons/ri";
 import { CiServer } from "react-icons/ci";
 import { ImProfile } from "react-icons/im";
 import { BiFoodMenu } from "react-icons/bi";
 import { Link, NavLink, Outlet } from 'react-router-dom';
 import logo from '../../assets/logo.png'
-import { FcAddDatabase } from 'react-icons/fc';
 import useAdmin from '../../hooks/useAdmin';
 
 const DashBoard = () => {
@@ -34,14 +34,14 @@ const DashBoard = () => {
                                 </Link>
                             </li>
                             <li className='text-lg'>
-                                <Link to='/dashboard/myprofile'>
+                                <Link to='/dashboard/manageuser'>
                                     <BiFoodMenu />
                                     Manage Users
                                 </Link>
                             </li>
                             <li className='text-lg'>
                                 <Link to='/dashboard/myprofile'>
-                                    <FcAddDatabase />
+                                    <RiApps2AddFill />
                                     Add Meal
                                 </Link>
                             </li>
