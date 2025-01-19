@@ -7,11 +7,12 @@ import UpcomingModal from '../component/UpcomingModal';
 const UpcomingMeal = () => {
     const axiosSecure = useAxiosSecure()
     const [isModalOpen, setModalOpen] = useState(false)
+    const [sort,setSort]= useState(false)
 
     const { data: upcominMeal = [], refetch } = useQuery({
-        queryKey: ["upcomingMeal"],
+        queryKey: ["upcomingMeal",sort],
         queryFn: async () => {
-            const res = await axiosSecure('/upcomingmeal/byadmin')
+            const res = await axiosSecure(`/upcomingmeal/byadmin?sort=${sort}`)
             return res.data
         }
     })
@@ -25,7 +26,12 @@ const UpcomingMeal = () => {
     }
 
     return (
-        <div className='bg-gradient-to-r from-purple-50 to-pink-50 mx-20 pt-5'>
+        <div className='bg-gradient-to-r from-purple-50 to-pink-50 mx-16 pt-5'>
+            <div className="w-full pl-16 md:w-52">
+                <button onClick={() => setSort(!sort)} className={`btn-sm rounded-lg ${sort ? "bg-purple-400" :"bg-base-200"} `} >
+                    {sort === true ? "sorted by likes" : "sort by likes"}
+                </button>
+            </div>
             <div className="overflow-x-auto py-2">
                 <table className="table max-w-2xl mx-auto rounded">
                     <thead className='bg-white text-center'>

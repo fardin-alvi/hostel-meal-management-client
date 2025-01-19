@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useLoaderData, useNavigate } from 'react-router-dom';
-import { FaDiagnoses, FaMapMarkerAlt, FaRegStar, FaStar, FaStarHalfAlt } from "react-icons/fa";
+import { FaDiagnoses, FaRegStar, FaStar, FaStarHalfAlt } from "react-icons/fa";
 import { MdOutlineTimeline } from "react-icons/md";
 import { BiSolidLike } from "react-icons/bi";
 import useAuth from '../hooks/useAuth';
@@ -8,19 +8,19 @@ import useAxiosSecure from '../hooks/useAxiosSecure';
 import toast from 'react-hot-toast';
 import useAxiosPublic from '../hooks/useAxiosPublic';
 
-const Mealdetials = () => {
-    const meals = useLoaderData();
-    const { image, title, price, rating, distributor, postTime, description, ingredients, _id, likes } = meals;
+const UpcomingMealDetails = () => {
+    const upcomingMeals = useLoaderData();
+    const { image, title, price, rating, distributor, postTime, description, ingredients, _id, likes } = upcomingMeals;
     const { user } = useAuth();
     const [review, setReview] = useState('');
     const [reviews, setReviews] = useState([]);
-    const [like, setLike] = useState(meals.likes || "");
+    const [like, setLike] = useState(upcomingMeals.likes || "");
     const axiosSecure = useAxiosSecure();
     const axiosPublic = useAxiosPublic();
     const navigate = useNavigate();
+    const [users, setUsers] = useState()
 
     useEffect(() => {
-
         axiosPublic.get(`/reviews/${_id}`)
             .then(res => {
                 setReviews(res.data);
@@ -29,6 +29,18 @@ const Mealdetials = () => {
                 console.error('Error fetching reviews:', error);
             });
     }, [_id])
+
+    useEffect(() => {
+        const res = async () => {
+            await axiosSecure.get(`/users/${user?.email}`)
+                .then(res => {
+                    console.log(res.data);
+                    setUsers(res.data)
+
+                })
+        }
+        res()
+    }, [user?.email])
 
     const renderStar = (rating) => {
         const fullstar = Math.floor(rating);
@@ -43,6 +55,8 @@ const Mealdetials = () => {
             </>
         );
     };
+
+    console.log(reviews);
 
     const handleReviewSubmit = (e) => {
         e.preventDefault();
@@ -73,35 +87,22 @@ const Mealdetials = () => {
 
     const handlelikes = async () => {
         if (user) {
-            const response = await axiosSecure.patch(`/like/${_id}`);
-            if (response.status === 200) {
-                setLike(prev => prev + 1); // Update the likes count locally
-                toast.success('Like added!');
+            console.log("User Subscription: ", user?.subscription
+            );
+            if (users?.subscription === 'Silver' || users?.subscription === 'Gold' || users?.subscription === 'Platinum') {
+                const response = await axiosSecure.patch(`/like/${_id}`);
+                if (response.status === 200) {
+                    setLike(prev => prev + 1);
+                    toast.success('Like added!');
+                }
+            } else {
+                toast.error('You need a subscription to like this meal.');
             }
         } else {
             navigate('/login');
         }
     };
 
-    const handleMealRequest = (meal) => {
-        if (user) {
-            axiosSecure.post('/mealrequest', {
-                title: meal.title,
-                likes: meal.likes || 0,
-                requested_user: user.email,
-                requested_user_name: user.displayName,
-                review_count: review.length,
-                status: 'pending',
-            })
-                .then(res => {
-                    if (res.data.insertedId) {
-                        toast.success('Meal Requested Done..');
-                    }
-                });
-        } else {
-            navigate('/login')
-        }
-    };
 
     return (
         <div className="min-h-screen bg-gradient-to-r from-purple-50 to-pink-50">
@@ -143,13 +144,9 @@ const Mealdetials = () => {
                         {description}
                     </p>
                     <p className="mt-3">
-                        <span className='font-medium'>Ingredient Used: </span>
-                        {ingredients}
+                        <span className='font-medium'>Ingredient Used:</span> {ingredients}
                     </p>
                     <div className='mt-3 flex gap-x-3'>
-                        <button onClick={() => handleMealRequest(meals)} className="flex items-center bg-purple-400 py-2 px-3 rounded-lg">
-                            Push for Meal
-                        </button>
                         <button onClick={handlelikes} className="flex items-center bg-purple-400 py-2 px-3 rounded-lg">
                             <BiSolidLike />
                         </button>
@@ -181,7 +178,7 @@ const Mealdetials = () => {
                                     <p className=" text-sm">{review.time}</p>
                                 </div>
                             </div>
-                            
+
                             <p className="text-gray-400 mt-2">{review.review}</p>
                         </div>
                     ))}
@@ -191,4 +188,4 @@ const Mealdetials = () => {
     );
 };
 
-export default Mealdetials;
+export default UpcomingMealDetails;

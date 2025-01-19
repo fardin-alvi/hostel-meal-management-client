@@ -1,6 +1,5 @@
 import {
-    createBrowserRouter,
-    RouterProvider,
+    createBrowserRouter
 } from "react-router-dom";
 import Mainpage from "../Main/Mainpage";
 import Register from "../pages/Register";
@@ -24,6 +23,7 @@ import Allmeals from "../AdminDashBoard/Allmeals";
 import Allreview from "../AdminDashBoard/Allreview";
 import Servemeal from "../AdminDashBoard/Servemeal";
 import UpcomingMeal from "../AdminDashBoard/UpcomingMeal";
+import UpcomingMealDetails from "../component/UpcomingMealDeails";
 
 const router = createBrowserRouter([
     {
@@ -53,7 +53,12 @@ const router = createBrowserRouter([
             },
             {
                 path: '/upcoming',
-                element: <UpcomingMeals />
+                element: <UpcomingMeals />,
+            },
+            {
+                path: '/upcoming/meal/details/:id',
+                element: <UpcomingMealDetails />,
+                loader: ({ params }) => fetch(`http://localhost:5000/upcoming/meal/details/${params.id}`)
             },
             {
                 path: 'checkout/:id',

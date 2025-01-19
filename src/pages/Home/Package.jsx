@@ -35,7 +35,7 @@ const Package = () => {
                     {plans?.map((plan, index) => (
                         <Link to={`/checkout/${plan._id}`}
                             key={index}
-                            className={`relative text-gray-600 py-16 px-6 flex flex-col items-center justify-center rounded-lg shadow-lg`}
+                            className={`relative ${plan.title === 'Silver' ? "bg-gray-300" : plan.title === 'Gold' ? 'bg-yellow-300' : plan.title === 'Platinum' ? "bg-blue-200" : ""} text-gray-600 py-16 px-6 flex flex-col items-center justify-center rounded-lg shadow-lg`}
                         >
                             <h3 className="text-2xl font-bold mb-4">{plan.title}</h3>
                             <p className="text-4xl font-bold mb-2">{plan.price}</p>

@@ -1,8 +1,9 @@
 import React from 'react';
 import { FaStar, FaStarHalfAlt, FaRegStar } from 'react-icons/fa'
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 const MealCard = ({ meal }) => {
+    const location = useLocation()
     const { image, title, price, rating,_id } = meal
     
       const renderStar = (rating) => {
@@ -30,10 +31,16 @@ const MealCard = ({ meal }) => {
                 <p className='text-lg'>${price}</p>
                 <p className='flex'>{renderStar(rating)}</p>
                 <div>
-                    <Link to={`/meal/${_id}`}
-                        className="bg-purple-400 px-4 py-1 rounded-lg hover:text-white">
-                        Details
-                    </Link>
+                    {
+                        location.pathname === '/meal/${_id}' ?
+                            <Link to={`/meal/${_id}`}
+                                className="bg-purple-400 px-4 py-1 rounded-lg hover:text-white">
+                                Details
+                            </Link> : <Link to={`/upcoming/meal/details/${_id}`}
+                                className="bg-purple-400 px-4 py-1 rounded-lg hover:text-white">
+                                Details
+                            </Link>
+                    }
                 </div>
             </div>
         </div>

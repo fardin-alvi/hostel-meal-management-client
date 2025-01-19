@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import useAxiosSecure from '../hooks/useAxiosSecure';
+import axios from 'axios';
 import toast from 'react-hot-toast';
 import useAuth from '../hooks/useAuth';
 
@@ -61,12 +62,12 @@ const UpcomingModal = ({ isOpen, closeModal, refetch }) => {
                 review_count: 0
             };
 
-            const res = await axiosSecure.post('/upcomingmeal/byadmin', upcomingMeal);
+            const res = await axiosSecure.post('/upcoming/meal/byadmin', upcomingMeal);
             if (res.data.insertedId) {
                 refetch();
                 closeModal();
                 reset();
-                toast.success('Upcoming Meal Added Successfully');
+                toast.success('Meal Added Successfully');
             }
         } catch (error) {
             console.error('Error submitting form:', error);
@@ -161,7 +162,7 @@ const UpcomingModal = ({ isOpen, closeModal, refetch }) => {
                                     <label className="block text-sm font-medium">Image</label>
                                     <input
                                         type="file"
-                                        className="file-input file-input-bordered w-full mt-1"
+                                        className="file-input file:bg-purple-400 file-input-bordered w-full mt-1"
                                         {...register('image', { required: 'Image is required' })}
                                         onChange={(e) => setImagePreview(URL.createObjectURL(e.target.files[0]))}
                                     />
