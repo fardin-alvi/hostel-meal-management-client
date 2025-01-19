@@ -58,7 +58,7 @@ const DashBoard = () => {
                                 </Link>
                             </li>
                             <li className='text-lg'>
-                                <Link to='/dashboard/myprofile'>
+                                <Link to='/dashboard/servemeal'>
                                     <CiServer />
                                     Serve Meals
                                 </Link>

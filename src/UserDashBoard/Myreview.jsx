@@ -13,14 +13,14 @@ const Myreview = () => {
     const { data: reviews = [], refetch } = useQuery({
         queryKey: ['reviews'],
         queryFn: async () => {
-            const res = await axiosSecure.get(`/reviews/email/${user?.email}`)
+            const res = await axiosSecure.get(`/reviews/useremail/${user?.email}`)
             return res.data
         }
     })
 
     const handledelete = async (id) => {
         try {
-            const res = await axiosSecure.delete(`/reviews/email/${id}`);
+            const res = await axiosSecure.delete(`/reviews/useremail/${user?.email}/meal/${id}`);
             if (res.data.deletedCount > 0) {
                 toast.success('Deleted successfully');
                 refetch();

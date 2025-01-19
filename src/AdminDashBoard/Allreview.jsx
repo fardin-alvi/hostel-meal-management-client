@@ -3,21 +3,29 @@ import useAuth from '../hooks/useAuth';
 import useAxiosSecure from '../hooks/useAxiosSecure';
 import { useQuery } from '@tanstack/react-query';
 import { Link } from 'react-router-dom';
+import toast from 'react-hot-toast';
 
 const Allreview = () => {
-    const { user } = useAuth()
     const axiosSecure = useAxiosSecure()
 
-    const { data: allreview = [] } = useQuery({
+    const { data: allreview = [],refetch } = useQuery({
         queryKey: ['allreview'],
         queryFn: async () => {
-            const res = await axiosSecure.get(`/reviews/adminemail/${user?.email}`)
+            const res = await axiosSecure.get(`/admin/reviews`)
             return res.data
         }
     })
 
-    const handleDelete = () => {
-        
+    const handleDelete = async (id) => {
+        try {
+            const res = await axiosSecure.delete(`/admin/review/${id}`)
+            if (res.data.deleteCount) {
+                toast.success()
+                refetch()
+            }
+        } catch (error) {
+            toast.error('Failed to delete')
+        }
     }
 
     return (
@@ -49,7 +57,7 @@ const Allreview = () => {
                                     <button onClick={() => handleDelete(review?._id)} className='btn-sm bg-purple-400 px-4 rounded-xl'>Delete</button>
                                 </td>
                                 <td>
-                                    <Link to={`/review/${review._id}`} className='btn-md bg-purple-400 p-2 rounded-xl whitespace-nowrap'>View Meal</Link>
+                                    <Link to={`/meal/${review.mealId}`} className='btn-md bg-purple-400 p-2 rounded-xl whitespace-nowrap'>View Meal</Link>
                                 </td>
                             </tr>)
                         }

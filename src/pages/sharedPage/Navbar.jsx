@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
-import { Link, NavLink, useParams } from 'react-router-dom';
+import { Link, NavLink, useNavigate, useParams } from 'react-router-dom';
 import logo from '../../assets/logo.png'
 import useAuth from '../../hooks/useAuth';
 
 const Navbar = () => {
     const { user, logout } = useAuth()
+    const navigate = useNavigate()
 
     const handlelogOut = () => {
         logout().then(() => {
+            navigate('/')
         }).catch(err => console.log(err.message))
     }
 

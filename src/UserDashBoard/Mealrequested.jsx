@@ -2,25 +2,27 @@ import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 import useAxiosSecure from '../hooks/useAxiosSecure';
 import toast from 'react-hot-toast';
+import useAuth from '../hooks/useAuth';
 
 const Mealrequested = () => {
+    const {user}= useAuth()
     const axiosSecure = useAxiosSecure()
 
     const { data: mealRequest = [],refetch } = useQuery({
         queryKey: ['mealrequest'],
         queryFn: async () => {
-            const res = await axiosSecure.get('/mealrequest')
+            const res = await axiosSecure.get(`/mealrequest/user/${user?.email}`)
             return res.data
         }
     })
 
     const handledelete = (id) => {
-        axiosSecure.delete(`/mealreq/${id}`)
+        axiosSecure.delete(`/mealreq/useremail/${user?.email}/meal/${id}`)
             .then(res => {
                 console.log(res.data);
                 if (res.data.deletedCount > 0) {
                     refetch()
-                    toast.success('Deleted Requested Meal')
+                    toast.success('Cencel Requested Meal')
                 }
         })
     }

@@ -22,6 +22,7 @@ import ManageUsers from "../AdminDashBoard/ManageUsers";
 import Addmeals from "../AdminDashBoard/Addmeals";
 import Allmeals from "../AdminDashBoard/Allmeals";
 import Allreview from "../AdminDashBoard/Allreview";
+import Servemeal from "../AdminDashBoard/Servemeal";
 
 const router = createBrowserRouter([
     {
@@ -104,6 +105,10 @@ const router = createBrowserRouter([
             {
                 path: 'allreview',
                 element:<Allreview/>
+            },
+            {
+                path: 'servemeal',
+                element:<Servemeal/>
             }
 
 

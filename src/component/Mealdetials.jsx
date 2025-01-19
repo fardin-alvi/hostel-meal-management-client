@@ -88,6 +88,7 @@ const Mealdetials = () => {
             title: meal.title,
             likes: meal.likes || 0,
             requested_user: user.email,
+            requested_user_name: user.displayName,
             review_count: review.length,
             status: 'pending',
         })
