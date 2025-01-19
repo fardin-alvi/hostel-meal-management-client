@@ -31,7 +31,7 @@ const Addmeals = () => {
             minute: 'numeric',
             hour12: true
         };
-        return date.toLocaleString('en-US', options);  // Format: "Thu, Jan 18, 2025, 12:21 AM"
+        return date.toLocaleString('en-US', options); 
     };
 
 
@@ -87,7 +87,6 @@ const Addmeals = () => {
                     onSubmit={handleSubmit(onSubmit)}
                     className="grid grid-cols-1 md:grid-cols-2 gap-6"
                 >
-                    {/* Meal Title */}
                     <div>
                         <label className="block text-sm font-medium text-gray-700">Title</label>
                         <input
@@ -99,7 +98,6 @@ const Addmeals = () => {
                         {errors.title && <span className="text-red-500 text-sm">{errors.title.message}</span>}
                     </div>
 
-                    {/* Category */}
                     <div>
                         <label className="block text-sm font-medium text-gray-700">Category</label>
                         <select
@@ -118,8 +116,6 @@ const Addmeals = () => {
                             <span className="text-red-500 text-sm">{errors.category.message}</span>
                         )}
                     </div>
-
-                    {/* Distributor Name */}
                     <div>
                         <label className="block text-sm font-medium text-gray-700">Distributor Name</label>
                         <input
@@ -129,8 +125,6 @@ const Addmeals = () => {
                             defaultValue={user.displayName}
                         />
                     </div>
-
-                    {/* Distributor Email */}
                     <div>
                         <label className="block text-sm font-medium text-gray-700">Distributor Email</label>
                         <input
@@ -140,8 +134,6 @@ const Addmeals = () => {
                             defaultValue={user.email}
                         />
                     </div>
-
-                    {/* Price */}
                     <div>
                         <label className="block text-sm font-medium text-gray-700">Price</label>
                         <input
@@ -152,8 +144,6 @@ const Addmeals = () => {
                         />
                         {errors.price && <span className="text-red-500 text-sm">{errors.price.message}</span>}
                     </div>
-
-                    {/* Post Time */}
                     <div>
                         <label className="block text-sm font-medium text-gray-700">Post Time</label>
                         <input
@@ -167,9 +157,7 @@ const Addmeals = () => {
                         )}
                     </div>
 
-                    {/* Image * image preview */}
                     <div className="md:col-span-2 flex flex-col md:flex-row items-center gap-x-6">
-                        {/* File Input */}
                         <div className="flex-1">
                             <label className="block text-sm font-medium text-gray-700">Image</label>
                             <input
@@ -180,7 +168,6 @@ const Addmeals = () => {
                             />
                         </div>
                         {errors.image && <span className="text-red-500 text-sm">{errors.image.message}</span>}
-                        {/* Image Preview */}
                         <div className="flex-1 border rounded-lg  flex justify-center items-center h-32">
                             {Image ? (
                                 <img
@@ -193,8 +180,6 @@ const Addmeals = () => {
                             )}
                         </div>
                     </div>
-
-                    {/* Description */}
                     <div className="col-span-2">
                         <label className="block text-sm font-medium text-gray-700">Description</label>
                         <textarea
@@ -206,8 +191,6 @@ const Addmeals = () => {
                             <span className="text-red-500 text-sm">{errors.description.message}</span>
                         )}
                     </div>
-
-                    {/* Ingredients */}
                     <div className="col-span-2">
                         <label className="block text-sm font-medium text-gray-700">Ingredients</label>
                         <textarea
@@ -220,7 +203,6 @@ const Addmeals = () => {
                         )}
                     </div>
 
-                    {/* Submit Button */}
                     <div className="col-span-2 mt-6 flex justify-end">
                         <button type="submit" className="px-6 py-2 rounded-lg bg-purple-400 text-white">
                             Add Meal

@@ -1,0 +1,92 @@
+[
+  {
+    "title": "Berry Yogurt Parfait",
+    "category": "breakfast",
+    "image": "https://i.ibb.co.com/SfkMQhC/pexels-photo-14122621.jpg",
+    "rating": 4.9,
+    "price": 4.79,
+    "likes": 8,
+    "distributor": "Fresh Start"
+  },
+  {
+    "title": "Classic Waffles",
+    "category": "breakfast",
+    "image": "https://i.ibb.co.com/yXwN58Y/free-photo-of-food-on-a-large-plate.jpg",
+    "rating": 4.6,
+    "price": 5.49,
+    "likes": 7,
+    "distributor": "Waffle House"
+  },
+  {
+    "title": "Tomato Basil Soup",
+    "category": "lunch",
+    "image": "https://i.ibb.co.com/2qM5rHG/pexels-photo-4062274.jpg",
+    "rating": 4.8,
+    "price": 7.99,
+    "likes": 5,
+    "distributor": "Soup Central"
+  },
+  {
+    "title": "Caprese Sandwich",
+    "category": "lunch",
+    "image": "https://i.ibb.co.com/0FSg6VH/pexels-photo-5967861.jpg",
+    "rating": 4.7,
+    "price": 8.49,
+    "likes": 9,
+    "distributor": "Sandwich Masters"
+  },
+  {
+    "title": "Herb Grilled Vegetables",
+    "category": "lunch",
+    "image": "https://i.ibb.co.com/KbH79vp/free-photo-of-delicious-grilled-salmon-with-fresh-vegetables.jpg",
+    "rating": 4.5,
+    "price": 9.29,
+    "likes": 6,
+    "distributor": "Healthy Eats"
+  },
+  {
+    "title": "Lemon Herb Chicken",
+    "category": "dinner",
+    "image": "https://i.ibb.co.com/xX53vT8/pexels-photo-9219087.jpg",
+    "rating": 4.9,
+    "price": 13.49,
+    "likes": 10,
+    "distributor": "Grill Perfection"
+  },
+  {
+    "title": "Stuffed Bell Peppers",
+    "category": "dinner",
+    "image": "https://i.ibb.co.com/vsm4s38/free-photo-of-food-on-table.jpg",
+    "rating": 4.7,
+    "price": 12.99,
+    "likes": 4,
+    "distributor": "Veggie Delights"
+  },
+  {
+    "title": "Cheese Ravioli",
+    "category": "dinner",
+    "image": "https://i.ibb.co.com/02DxYRL/pexels-photo-772508.jpg",
+    "rating": 4.6,
+    "price": 14.49,
+    "likes": 7,
+    "distributor": "Pasta Palace"
+  },
+  {
+    "title": "Vegan Buddha Bowl",
+    "category": "lunch",
+    "image": "https://i.ibb.co.com/Y8VNDLg/pexels-photo-8992843.jpg",
+    "rating": 4.8,
+    "price": 11.29,
+    "likes": 10,
+    "distributor": "Vegan Vibes"
+  },
+  {
+    "title": "Eggs Benedict",
+    "category": "breakfast",
+    "image": "https://i.ibb.co.com/r49qBHS/free-photo-of-delicious-breakfast-with-egg-bacon-and-salad.jpg",
+    "rating": 4.9,
+    "price": 6.99,
+    "likes": 9,
+    "distributor": "Breakfast Bliss"
+  }
+]

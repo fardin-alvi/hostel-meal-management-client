@@ -23,6 +23,7 @@ import Addmeals from "../AdminDashBoard/Addmeals";
 import Allmeals from "../AdminDashBoard/Allmeals";
 import Allreview from "../AdminDashBoard/Allreview";
 import Servemeal from "../AdminDashBoard/Servemeal";
+import UpcomingMeal from "../AdminDashBoard/UpcomingMeal";
 
 const router = createBrowserRouter([
     {
@@ -109,6 +110,10 @@ const router = createBrowserRouter([
             {
                 path: 'servemeal',
                 element:<Servemeal/>
+            },
+            {
+                path: 'upcomingmeal',
+                element:<UpcomingMeal/>
             }
 
 
