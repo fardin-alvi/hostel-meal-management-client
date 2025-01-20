@@ -1,5 +1,5 @@
-import React from 'react';
-import {FaHome, } from 'react-icons/fa';
+import React, { useState } from 'react';
+import { FaHome, FaBars, FaTimes } from 'react-icons/fa';
 import { MdFoodBank, MdOutlinePayments, MdOutlineRateReview, MdUpcoming } from "react-icons/md";
 import { FaMessage } from 'react-icons/fa6';
 import { RiApps2AddFill } from "react-icons/ri";
@@ -7,128 +7,144 @@ import { CiServer } from "react-icons/ci";
 import { ImProfile } from "react-icons/im";
 import { BiFoodMenu } from "react-icons/bi";
 import { Link, NavLink, Outlet } from 'react-router-dom';
-import logo from '../../assets/logo.png'
+import logo from '../../assets/logo.png';
 import useAdmin from '../../hooks/useAdmin';
 
 const DashBoard = () => {
-    const [isAdmin] = useAdmin()
+    const [isAdmin] = useAdmin();
+    const [isMenuOpen, setMenuOpen] = useState(false);
 
+    const toggleMenu = () => setMenuOpen(!isMenuOpen);
 
     return (
-        <div className='flex'>
-            <div className='max-h-full flex flex-col items-center bg-gradient-to-r from-purple-300 to-pink-300 py-4 px-8'>
-
-                <ul className='menu'>
-                    <li className='mb-6'>
-                        <div className='flex flex-col items-start'>
-                            <img className='w-20 h-12' src={logo} alt="" />
-                            <h2 className='text-2xl font-semibold'>BunkInn</h2>
+        <div className="flex flex-col md:flex-row">
+            <div className={`flex flex-col items-center bg-gradient-to-r from-purple-300 to-pink-300 py-4 px-8 
+                ${isMenuOpen ? 'absolute top-0 left-0 h-full w-3/4 z-50' : 'hidden'} md:flex md:relative md:w-1/4`}>
+                <ul className="menu w-full">
+                    <li className="mb-6">
+                        <div className="flex flex-col items-center">
+                            <img className="w-20 h-12" src={logo} alt="Logo" />
+                            <h2 className="text-2xl font-semibold">BunkInn</h2>
                         </div>
                     </li>
-                    {
-                        isAdmin ? <>
-                            <li className='text-lg'>
-                                <Link to='/dashboard/adminprofile'>
+                    {isAdmin ? (
+                        <>
+                            <li className="text-lg">
+                                <Link to="/dashboard/adminprofile" onClick={toggleMenu}>
                                     <ImProfile />
                                     Admin Profile
                                 </Link>
                             </li>
-                            <li className='text-lg'>
-                                <Link to='/dashboard/manageuser'>
+                            <li className="text-lg">
+                                <Link to="/dashboard/manageuser" onClick={toggleMenu}>
                                     <BiFoodMenu />
                                     Manage Users
                                 </Link>
                             </li>
-                            <li className='text-lg'>
-                                <Link to='/dashboard/addmeal'>
+                            <li className="text-lg">
+                                <Link to="/dashboard/addmeal" onClick={toggleMenu}>
                                     <RiApps2AddFill />
                                     Add Meal
                                 </Link>
                             </li>
-                            <li className='text-lg'>
-                                <Link to='/dashboard/allmeals'>
+                            <li className="text-lg">
+                                <Link to="/dashboard/allmeals" onClick={toggleMenu}>
                                     <MdFoodBank />
                                     All Meals
                                 </Link>
                             </li>
-                            <li className='text-lg'>
-                                <Link to='/dashboard/allreview'>
+                            <li className="text-lg">
+                                <Link to="/dashboard/allreview" onClick={toggleMenu}>
                                     <MdOutlineRateReview />
                                     All Reviews
                                 </Link>
                             </li>
-                            <li className='text-lg'>
-                                <Link to='/dashboard/servemeal'>
+                            <li className="text-lg">
+                                <Link to="/dashboard/servemeal" onClick={toggleMenu}>
                                     <CiServer />
                                     Serve Meals
                                 </Link>
                             </li>
-                            <li className='text-lg'>
-                                <Link to='/dashboard/upcomingmeal'>
+                            <li className="text-lg">
+                                <Link to="/dashboard/upcomingmeal" onClick={toggleMenu}>
                                     <MdUpcoming />
                                     Upcoming Meals
                                 </Link>
                             </li>
-                        </> : <>
-                            <li className='text-lg'>
-                                <NavLink to='/dashboard/myprofile'>
+                        </>
+                    ) : (
+                        <>
+                            <li className="text-lg">
+                                <NavLink to="/dashboard/myprofile" onClick={toggleMenu}>
                                     <ImProfile />
                                     My Profile
                                 </NavLink>
                             </li>
-                            <li className='text-lg'>
-                                <NavLink to='/dashboard/mealrequest'>
+                            <li className="text-lg">
+                                <NavLink to="/dashboard/mealrequest" onClick={toggleMenu}>
                                     <BiFoodMenu />
                                     Requested Meal
                                 </NavLink>
                             </li>
-                            <li className='text-lg'>
-                                <NavLink to='/dashboard/myreview'>
+                            <li className="text-lg">
+                                <NavLink to="/dashboard/myreview" onClick={toggleMenu}>
                                     <MdOutlineRateReview />
                                     My Reviews
                                 </NavLink>
                             </li>
-                            <li className='text-lg'>
-                                <NavLink to='/dashboard/payment-history'>
+                            <li className="text-lg">
+                                <NavLink to="/dashboard/payment-history" onClick={toggleMenu}>
                                     <MdOutlinePayments />
                                     Payment History
                                 </NavLink>
                             </li>
                         </>
-                    }
-                    <div className='divider'></div>
-                    <li className='text-lg'>
-                        <NavLink to='/'>
+                    )}
+                    <div className="divider"></div>
+                    <li className="text-lg">
+                        <NavLink to="/" onClick={toggleMenu}>
                             <FaHome />
                             Home
                         </NavLink>
                     </li>
-                    <li className='text-lg'>
-                        <NavLink to='/meals'>
+                    <li className="text-lg">
+                        <NavLink to="/meals" onClick={toggleMenu}>
                             <MdFoodBank />
                             Meals
                         </NavLink>
                     </li>
-                    <li className='text-lg'>
-                        <NavLink to='/upcoming'>
+                    <li className="text-lg">
+                        <NavLink to="/upcoming" onClick={toggleMenu}>
                             <MdUpcoming />
                             Upcoming Meals
                         </NavLink>
                     </li>
-                    <li className='text-lg'>
-                        <NavLink to='/ouritems/salad'>
+                    <li className="text-lg">
+                        <NavLink to="/" onClick={toggleMenu}>
                             <FaMessage />
                             Contact
                         </NavLink>
                     </li>
-
                 </ul>
+
+                <button 
+                    className="mt-4 bg-green-400 text-white py-2 flex items-center justify-center px-4 rounded-md text-lg md:hidden" 
+                    onClick={toggleMenu}>
+                    <FaTimes /> Close
+                </button>
             </div>
-            <div className='flex-1 px-6 py-5'>
-                <Outlet></Outlet>
+            <div className="flex-1 px-6 py-5">
+                <div className="md:hidden flex justify-between items-center mb-4">
+                    <button onClick={toggleMenu} className="text-2xl">
+                        {isMenuOpen ? <FaTimes /> : <FaBars />}
+                    </button>
+                    <h2 className="text-2xl font-semibold">BunkInn</h2>
+                </div>
+                <Outlet />
             </div>
         </div>
     );
 };
 
 export default DashBoard;
+

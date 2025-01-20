@@ -7,10 +7,11 @@ import { Bars } from 'react-loader-spinner';
 
 const MealsCategory = () => {
     const [category, setCategory] = useState('');
-    const [meals, isLoading, refetch] = useMeals('', category, '', 1);
+    const [meals, isLoading, hasNextPage, refetch] = useMeals('', category, '', 1);
 
     useEffect(() => {
-    }, [category, refetch])
+        refetch();
+    }, [category,refetch])
 
     const breakfast = meals.filter(meal => meal.category === 'breakfast');
     const lunch = meals.filter(meal => meal.category === 'lunch');

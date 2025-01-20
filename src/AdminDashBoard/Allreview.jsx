@@ -33,7 +33,7 @@ const Allreview = () => {
     }
 
     return (
-        <div className='bg-gradient-to-r from-purple-50 to-pink-50 mx-20 pt-5'>
+        <div className='bg-gradient-to-r from-purple-50 to-pink-50 md:mx-20 pt-5'>
             <div className="overflow-x-auto py-2">
                 <table className="table max-w-2xl mx-auto rounded">
                     <thead className='bg-white text-center'>

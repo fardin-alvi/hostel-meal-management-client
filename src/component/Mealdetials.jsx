@@ -16,10 +16,11 @@ const Mealdetials = () => {
     const [reviews, setReviews] = useState([]);
     const [like, setLike] = useState(meals.likes || "");
     const [hasLiked, setHasLiked] = useState(false);
+    
     const axiosSecure = useAxiosSecure();
     const axiosPublic = useAxiosPublic();
     const navigate = useNavigate();
-
+    const [hascliked, sethasClicked] = useState(false)
     useEffect(() => {
 
         axiosPublic.get(`/reviews/${_id}`)
@@ -90,6 +91,10 @@ const Mealdetials = () => {
 
     const handleMealRequest = (meal) => {
         if (user) {
+            if (hascliked) {
+                toast.error('you already requested for this meal')
+                return
+            }
             axiosSecure.post('/mealrequest', {
                 title: meal.title,
                 likes: meal.likes || 0,
@@ -100,6 +105,7 @@ const Mealdetials = () => {
             })
                 .then(res => {
                     if (res.data.insertedId) {
+                        sethasClicked(true)
                         toast.success('Meal Requested Done..');
                     }
                 });
@@ -152,8 +158,8 @@ const Mealdetials = () => {
                         {ingredients}
                     </p>
                     <div className='mt-3 flex gap-x-3'>
-                        <button onClick={() => handleMealRequest(meals)} className="flex items-center bg-purple-400 py-2 px-3 rounded-lg">
-                            Push for Meal
+                        <button onClick={() => handleMealRequest(meals)} disabled={hascliked} className="flex items-center bg-purple-400 py-2 px-3 rounded-lg">
+                            {hascliked ? <span className="ml-2 text-gray-500">Meal Requested</span> : <span >Request for Meal</span>}
                         </button>
                         <button onClick={handlelikes} disabled={hasLiked} className="flex items-center bg-purple-400 py-2 px-3 rounded-lg">
                             <BiSolidLike />

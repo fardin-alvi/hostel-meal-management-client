@@ -33,7 +33,7 @@ const UpcomingMeal = () => {
     }
 
     return (
-        <div className='bg-gradient-to-r from-purple-50 to-pink-50 mx-16 pt-5'>
+        <div className='bg-gradient-to-r from-purple-50 to-pink-50 md:mx-16 pt-5'>
             <div className="w-full pl-16 md:w-52">
                 <button onClick={() => setSort(!sort)} className={`btn-sm rounded-lg ${sort ? "bg-purple-400" :"bg-base-200"} `} >
                     {sort === true ? "sorted by likes" : "sort by likes"}

@@ -14,7 +14,6 @@ const UpcomingMealDetails = () => {
     const { user } = useAuth();
     const [reviews, setReviews] = useState([]);
     const [like, setLike] = useState(upcomingMeals.likes || "");
-    const [hasLiked, setHasLiked] = useState(false);
     const axiosSecure = useAxiosSecure();
     const axiosPublic = useAxiosPublic();
     const navigate = useNavigate();

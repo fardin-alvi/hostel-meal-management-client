@@ -30,7 +30,7 @@ const ManageUsers = () => {
     }
 
     return (
-        <div className="bg-gradient-to-r from-purple-50 to-pink-50 mx-20 pt-5">
+        <div className="bg-gradient-to-r from-purple-50 to-pink-50 px-2 md:mx-20 pt-5">
             <div className="max-w-2xl mx-auto">
                 <div className="flex justify-start mb-5">
                     <input

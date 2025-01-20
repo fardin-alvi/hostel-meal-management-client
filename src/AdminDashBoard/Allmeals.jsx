@@ -1,17 +1,19 @@
-import { useQuery } from '@tanstack/react-query';
 import React, { useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
 import useAxiosSecure from '../hooks/useAxiosSecure';
 import useAuth from '../hooks/useAuth';
 import { Link } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import Pagination from '../component/Pagination';
+import UpcomingModal from '../component/UpcomingModal';
 
-const Allmeals = () => {
+const AllMeals = () => {
     const { user } = useAuth();
     const axiosSecure = useAxiosSecure();
-    const [sort, setSort] = useState(""); 
-    const [currentPage, setCurrentPage] = useState(1); 
-
+    const [sort, setSort] = useState('');
+    const [currentPage, setCurrentPage] = useState(1);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [selectedMeal, setSelectedMeal] = useState(null); 
 
     const { data: mealsDetails = {}, refetch } = useQuery({
         queryKey: ['meal', sort, currentPage],
@@ -30,8 +32,18 @@ const Allmeals = () => {
         }
     };
 
+    const handleEdit = (meal) => {
+        setSelectedMeal(meal);
+        setIsModalOpen(true);
+    };
+
+    const closeModal = () => {
+        setIsModalOpen(false);
+        setSelectedMeal(null);
+    };
+
     return (
-        <div className="bg-gradient-to-r from-purple-50 to-pink-50 mx-20 pt-5">
+        <div className="bg-gradient-to-r from-purple-50 to-pink-50 md:mx-20 pt-5">
             <div className="w-full pl-2 md:w-52">
                 <select
                     className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
@@ -66,7 +78,12 @@ const Allmeals = () => {
                                     <td>{meal.rating || 0}</td>
                                     <td>{meal.distributor || 'N/A'}</td>
                                     <td>
-                                        <button className="btn-sm bg-purple-400 px-4 rounded-xl">Edit</button>
+                                        <button
+                                            onClick={() => handleEdit(meal)}
+                                            className="btn-sm bg-purple-400 px-4 rounded-xl"
+                                        >
+                                            Edit
+                                        </button>
                                     </td>
                                     <td>
                                         <button
@@ -102,8 +119,15 @@ const Allmeals = () => {
                     onPageChange={(page) => setCurrentPage(page)}
                 />
             </div>
+
+            <UpcomingModal
+                isOpen={isModalOpen}
+                closeModal={closeModal}
+                refetch={refetch}
+                mealData={selectedMeal} 
+            />
         </div>
     );
 };
 
-export default Allmeals;
+export default AllMeals;

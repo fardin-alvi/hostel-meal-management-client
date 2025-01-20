@@ -79,7 +79,7 @@ const Addmeals = () => {
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center p-4">
+        <div className="min-h-screen flex items-center justify-center md:p-4">
             <div className="max-w-4xl w-full bg-gradient-to-r from-purple-50 to-pink-50 shadow-md rounded-md p-6">
                 <h2 className="text-2xl font-semibold mb-4 text-gray-800">Enter Your Best Meal</h2>
                 <form
@@ -156,12 +156,12 @@ const Addmeals = () => {
                         )}
                     </div>
 
-                    <div className="md:col-span-2 flex flex-col md:flex-row items-center gap-x-6">
+                    <div className="md:col-span-2  flex flex-col md:flex-row items-center md:gap-x-6">
                         <div className="flex-1">
                             <label className="block text-sm font-medium text-gray-700">Image</label>
                             <input
                                 type="file"
-                                className="file-input file-input-bordered file:bg-purple-400 file:text-white file:hover:bg-purple-600 w-96 mt-1"
+                                className="file-input file-input-bordered file:bg-purple-400 file:text-white file:hover:bg-purple-600 md:w-96 w-auto mt-1"
                                 {...register('image', { required: 'Image is required' })}
                                 onChange={(e) => setImage(URL.createObjectURL(e.target.files[0]))}
                             />
@@ -172,7 +172,7 @@ const Addmeals = () => {
                                 <img
                                     src={Image}
                                     alt="Uploaded"
-                                    className="max-w-80 max-h-full object-cover"
+                                    className="md:max-w-80 md:max-h-full object-cover"
                                 />
                             ) : (
                                 <span className="text-gray-400 text-sm">No file uploaded</span>

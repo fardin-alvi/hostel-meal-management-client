@@ -48,7 +48,7 @@ const PaymentHistory = () => {
             <Link to='/dashboard/myprofile' className="mt-6 bg-purple-400 text-white px-6 py-2 rounded-full hover:bg-green-700">
                 Take me to my Profile
             </Link>
-        </div> : <div className="min-h-full flex flex-col justify-center items-center bg-gradient-to-r from-purple-50 to-pink-50 ">
+        </div> : <div className="min-h-full py-10 md:py-0 flex flex-col justify-center items-center bg-gradient-to-r from-purple-50 to-pink-50 ">
                 <Lottie
                     options={unavailable}
                     height={160}

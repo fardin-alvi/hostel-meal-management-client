@@ -28,7 +28,7 @@ const Servemeal = () => {
     };
 
     return (
-        <div className="bg-gradient-to-r from-purple-50 to-pink-50 mx-20 pt-5">
+        <div className="bg-gradient-to-r from-purple-50 to-pink-50 md:mx-20 pt-5">
             <div className="relative pl-14 w-full mb-3 md:w-2/4">
                 <input
                     type="text"
