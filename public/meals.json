@@ -2,140 +2,140 @@
     {
       "title": "Pancakes with Maple Syrup",
       "category": "breakfast",
-      "image": "https://i.ibb.co.com/Lk6VhSS/break.webp",
+      "image": "https://i.ibb.co.com/5BzHkws/pexels-photo-4929715.jpg",
       "rating": 4.8,
       "price": 5.99
     },
     {
       "title": "Vegetable Omelette",
       "category": "breakfast",
-      "image": "https://i.ibb.co.com/Lk6VhSS/break.webp",
+      "image": "https://i.ibb.co.com/d5p2K1C/pexels-photo-2297961.jpg",
       "rating": 4.5,
       "price": 6.49
     },
     {
       "title": "Avocado Toast",
       "category": "breakfast",
-      "image": "https://i.ibb.co.com/Lk6VhSS/break.webp",
+      "image": "https://i.ibb.co.com/5K515Lr/pexels-photo-6327126.jpg",
       "rating": 4.7,
       "price": 7.29
     },
     {
       "title": "French Toast with Berries",
       "category": "breakfast",
-      "image": "https://i.ibb.co.com/Lk6VhSS/break.webp",
+      "image": "https://i.ibb.co.com/0twdxVC/pexels-photo-793782.jpg",
       "rating": 4.6,
       "price": 6.99
     },
     {
       "title": "Smoothie Bowl",
       "category": "breakfast",
-      "image": "https://i.ibb.co.com/Lk6VhSS/break.webp",
+      "image": "https://i.ibb.co.com/P95KSm6/pexels-photo-7439731.jpg",
       "rating": 4.9,
       "price": 8.49
     },
     {
       "title": "Grilled Chicken Salad",
       "category": "lunch",
-      "image": "https://example.com/images/chicken_salad.jpg",
+      "image": "https://i.ibb.co.com/vqXhKKS/pexels-photo-14774996.jpg",
       "rating": 4.6,
       "price": 9.99
     },
     {
       "title": "Spaghetti Carbonara",
       "category": "lunch",
-      "image": "https://i.ibb.co.com/CW7MWw0/2.jpg",
+      "image": "https://i.ibb.co.com/gtnCqBX/free-photo-of-delicious-italian-carbonara-pasta-on-plate.jpg",
       "rating": 4.4,
       "price": 11.49
     },
     {
       "title": "Vegetarian Burrito Bowl",
       "category": "lunch",
-      "image": "https://i.ibb.co.com/CW7MWw0/2.jpg",
+      "image": "https://i.ibb.co.com/LYtzJT4/pexels-photo-765548.jpg",
       "rating": 4.7,
       "price": 10.29
     },
     {
       "title": "Chicken Wrap",
       "category": "lunch",
-      "image": "https://i.ibb.co.com/CW7MWw0/2.jpg",
+      "image": "https://i.ibb.co.com/YRkJmnR/free-photo-of-delicious-chicken-doner-kebab-with-fresh-vegetables.jpg",
       "rating": 4.5,
       "price": 8.99
     },
     {
       "title": "Caesar Salad",
       "category": "lunch",
-      "image": "https://i.ibb.co.com/CW7MWw0/2.jpg",
+      "image": "https://i.ibb.co.com/6vzkh2m/pexels-photo-6671871.jpg",
       "rating": 4.3,
       "price": 9.49
     },
     {
       "title": "Grilled Salmon with Vegetables",
       "category": "dinner",
-      "image": "https://i.ibb.co.com/mzkcH36/din.jpg",
+      "image": "https://i.ibb.co.com/zhkcc5p/pexels-photo-6428279.jpg",
       "rating": 4.9,
       "price": 14.99
     },
     {
       "title": "Beef Steak with Mashed Potatoes",
       "category": "dinner",
-      "image": "https://i.ibb.co.com/mzkcH36/din.jpg",
+      "image": "https://i.ibb.co.com/5LWZtd2/pexels-photo-2739250.jpg",
       "rating": 4.8,
       "price": 18.49
     },
     {
       "title": "Vegetable Stir-Fry with Tofu",
       "category": "dinner",
-      "image": "https://i.ibb.co.com/mzkcH36/din.jpg",
+      "image": "https://i.ibb.co.com/9v9bC16/free-photo-of-delicious-stir-fried-vegetables-with-tofu.jpg",
       "rating": 4.7,
       "price": 12.29
     },
     {
       "title": "Chicken Alfredo Pasta",
       "category": "dinner",
-      "image": "https://i.ibb.co.com/mzkcH36/din.jpg",
+      "image": "https://i.ibb.co.com/mXS00jj/pexels-photo-14853731.jpg",
       "rating": 4.6,
       "price": 13.49
     },
     {
       "title": "Margarita Pizza",
       "category": "dinner",
-      "image": "https://i.ibb.co.com/mzkcH36/din.jpg",
+      "image": "https://i.ibb.co.com/2ZHgFmY/pexels-photo-6605220.jpg",
       "rating": 4.5,
       "price": 11.99
     },
     {
       "title": "Bacon and Egg Sandwich",
       "category": "breakfast",
-      "image": "https://i.ibb.co.com/Lk6VhSS/break.webp",
+      "image": "https://i.ibb.co.com/n0hyPQz/pexels-photo-139746.jpg",
       "rating": 4.8,
       "price": 5.49
     },
     {
       "title": "Chicken Caesar Wrap",
       "category": "lunch",
-      "image": "https://i.ibb.co.com/CW7MWw0/2.jpg",
+      "image": "https://i.ibb.co.com/6mGYwtk/pexels-photo-6416559.jpg",
       "rating": 4.6,
       "price": 8.99
     },
     {
       "title": "Shrimp Scampi",
       "category": "dinner",
-      "image": "https://i.ibb.co.com/mzkcH36/din.jpg",
+      "image": "https://i.ibb.co.com/0VLzGD3/pexels-photo-8697543.jpg",
       "rating": 4.7,
       "price": 15.99
     },
     {
       "title": "Breakfast Burrito",
       "category": "breakfast",
-      "image": "https://i.ibb.co.com/Lk6VhSS/break.webp",
+      "image": "https://i.ibb.co.com/Fzqrrs8/pexels-photo-974229.jpg",
       "rating": 4.5,
       "price": 6.99
     },
     {
       "title": "Fish Tacos",
       "category": "lunch",
-      "image": "https://i.ibb.co.com/CW7MWw0/2.jpg",
+      "image": "https://i.ibb.co.com/Zgt5sgP/pexels-photo-343870.jpg",
       "rating": 4.4,
       "price": 9.99
     }

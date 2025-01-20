@@ -15,6 +15,7 @@ const Mealdetials = () => {
     const [review, setReview] = useState('');
     const [reviews, setReviews] = useState([]);
     const [like, setLike] = useState(meals.likes || "");
+    const [hasLiked, setHasLiked] = useState(false);
     const axiosSecure = useAxiosSecure();
     const axiosPublic = useAxiosPublic();
     const navigate = useNavigate();
@@ -73,9 +74,14 @@ const Mealdetials = () => {
 
     const handlelikes = async () => {
         if (user) {
+            if (hasLiked) {
+                toast.error('You have already liked this meal!');
+                return;
+            }
             const response = await axiosSecure.patch(`/like/${_id}`);
             if (response.status === 200) {
-                setLike(prev => prev + 1); // Update the likes count locally
+                setLike(prev => prev + 1);
+                setHasLiked(true);
                 toast.success('Like added!');
             }
         } else {
@@ -150,8 +156,9 @@ const Mealdetials = () => {
                         <button onClick={() => handleMealRequest(meals)} className="flex items-center bg-purple-400 py-2 px-3 rounded-lg">
                             Push for Meal
                         </button>
-                        <button onClick={handlelikes} className="flex items-center bg-purple-400 py-2 px-3 rounded-lg">
+                        <button onClick={handlelikes} disabled={hasLiked} className="flex items-center bg-purple-400 py-2 px-3 rounded-lg">
                             <BiSolidLike />
+                            {hasLiked && <span className="ml-2 text-gray-500">Liked</span>}
                         </button>
                     </div>
                 </div>
@@ -181,7 +188,7 @@ const Mealdetials = () => {
                                     <p className=" text-sm">{review.time}</p>
                                 </div>
                             </div>
-                            
+
                             <p className="text-gray-400 mt-2">{review.review}</p>
                         </div>
                     ))}

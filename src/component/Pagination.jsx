@@ -22,6 +22,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
             >
                 Next
             </button>
+            
         </div>
     );
 };

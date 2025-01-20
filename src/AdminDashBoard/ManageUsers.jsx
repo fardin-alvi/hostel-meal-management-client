@@ -3,18 +3,21 @@ import React, { useState } from 'react';
 import useAxiosSecure from '../hooks/useAxiosSecure';
 import { BsPersonFillCheck } from "react-icons/bs";
 import toast from 'react-hot-toast';
+import Pagination from '../component/Pagination';
 
 const ManageUsers = () => {
     const axiosSecure = useAxiosSecure()
-    const[search,setSearch]= useState("")
+    const [search, setSearch] = useState("")
+    const [currentPage, setCurrentPage] = useState(1);
 
-    const { data: userInfo = [], refetch } = useQuery({
-        queryKey: ['userinfo',search],
+    const { data: userInfo = {}, refetch } = useQuery({
+        queryKey: ['userinfo',search,currentPage],
         queryFn: async () => {
-            const res = await axiosSecure.get(`/users?search=${search}`)
+            const res = await axiosSecure.get(`/users?search=${search}&page=${currentPage}`)
             console.log(res.data);
             return res.data
-        }
+        },
+        enabled: true,
     })
 
     const handleAdmin = (id) => {
@@ -50,7 +53,8 @@ const ManageUsers = () => {
                             </tr>
                         </thead>
                         <tbody className="text-center">
-                            {userInfo?.map((user) => (
+                            {
+                                userInfo?.data?.map((user) => (
                                 <tr key={user._id}>
                                     <td>{user.name}</td>
                                     <td>{user.email}</td>
@@ -68,10 +72,18 @@ const ManageUsers = () => {
                                     </td>
                                     <td>{user.subscription || "None"}</td>
                                 </tr>
-                            ))}
+                                ))
+                            }
                         </tbody>
                     </table>
                 </div>
+            </div>
+            <div className='pb-4'>
+                <Pagination
+                    currentPage={userInfo?.currentPage}
+                    totalPages={userInfo?.totalPages}
+                    onPageChange={(page) => setCurrentPage(page)}
+                />
             </div>
         </div>
     );

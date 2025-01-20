@@ -7,10 +7,10 @@ import { Bars } from 'react-loader-spinner';
 
 const MealsCategory = () => {
     const [category, setCategory] = useState('');
-    const [meals, isLoading,refetch] = useMeals('', category, '',1);
+    const [meals, isLoading, refetch] = useMeals('', category, '', 1);
 
     useEffect(() => {
-    }, [category,refetch])
+    }, [category, refetch])
 
     const breakfast = meals.filter(meal => meal.category === 'breakfast');
     const lunch = meals.filter(meal => meal.category === 'lunch');
@@ -31,7 +31,8 @@ const MealsCategory = () => {
     }
 
     return (
-        <div className="flex w-full justify-center items-center pt-16 px-4">
+        <div className="flex flex-col w-full justify-center items-center pt-16 md:px-4">
+            <h2 className='text-2xl font-medium pb-6'>Meals by Category</h2>
             <div className="w-full max-w-7xl px-2">
                 <Tab.Group>
                     <Tab.List className="flex justify-center gap-4">
@@ -50,28 +51,28 @@ const MealsCategory = () => {
                     </Tab.List>
                     <Tab.Panels className="mt-10">
                         <Tab.Panel>
-                            <div className="grid grid-cols-3 gap-2">
+                            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
                                 {breakfast.map(meal => (
                                     <MealCard key={meal.title} meal={meal} />
                                 ))}
                             </div>
                         </Tab.Panel>
                         <Tab.Panel>
-                            <div className="grid grid-cols-3 gap-2">
+                            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
                                 {lunch.map(meal => (
                                     <MealCard key={meal.title} meal={meal} />
                                 ))}
                             </div>
                         </Tab.Panel>
                         <Tab.Panel>
-                            <div className="grid grid-cols-3 gap-2">
+                            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
                                 {dinner.map(meal => (
                                     <MealCard key={meal.title} meal={meal} />
                                 ))}
                             </div>
                         </Tab.Panel>
                         <Tab.Panel>
-                            <div className="grid grid-cols-3 gap-2">
+                            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
                                 {meals.map(meal => (
                                     <MealCard key={meal.title} meal={meal} />
                                 ))}

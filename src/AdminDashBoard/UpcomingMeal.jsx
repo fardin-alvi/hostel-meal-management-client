@@ -3,18 +3,21 @@ import React, { useState } from 'react';
 import useAxiosSecure from '../hooks/useAxiosSecure';
 import toast from 'react-hot-toast';
 import UpcomingModal from '../component/UpcomingModal';
+import Pagination from '../component/Pagination';
 
 const UpcomingMeal = () => {
     const axiosSecure = useAxiosSecure()
     const [isModalOpen, setModalOpen] = useState(false)
-    const [sort,setSort]= useState(false)
+    const [sort, setSort] = useState(false)
+    const [currentPage,setCurrentPage]= useState(1)
 
-    const { data: upcominMeal = [], refetch } = useQuery({
-        queryKey: ["upcomingMeal",sort],
+    const { data: upcominMeal = {}, refetch } = useQuery({
+        queryKey: ["upcomingMeal",sort,currentPage],
         queryFn: async () => {
-            const res = await axiosSecure(`/upcomingmeal/byadmin?sort=${sort}`)
+            const res = await axiosSecure(`/upcomingmeal/byadmin?sort=${sort}&page=${currentPage}`)
             return res.data
-        }
+        },
+        enabled:true
     })
 
     const handlePublish = async (meal) => {
@@ -50,7 +53,7 @@ const UpcomingMeal = () => {
                     </thead>
                     <tbody className='text-center'>
                         {
-                            upcominMeal?.map((upcoming) => <tr key={upcoming._id}>
+                            upcominMeal?.data?.map((upcoming) => <tr key={upcoming._id}>
                                 <td>
                                     {upcoming.title}
                                 </td>
@@ -75,6 +78,13 @@ const UpcomingMeal = () => {
                 </table>
             </div>
             <UpcomingModal isOpen={isModalOpen} closeModal={() => setModalOpen(false)} refetch={refetch} />
+            <div className='pb-4'>
+                <Pagination
+                    currentPage={upcominMeal.currentPage}
+                    totalPages={upcominMeal.totalPages}
+                    onPageChange={(page) => setCurrentPage(page)}
+                />
+            </div>
         </div>
     );
 };

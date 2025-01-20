@@ -34,7 +34,7 @@ const Banner = () => {
     ];
 
     return (
-        <div className="relative px-6">
+        <div className="relative md:px-6">
             <AutoplaySlider
                 play={true}
                 bullets={false}

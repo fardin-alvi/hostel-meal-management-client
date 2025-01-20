@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, NavLink, useNavigate, useParams } from 'react-router-dom';
 import logo from '../../assets/logo.png'
 import useAuth from '../../hooks/useAuth';
@@ -6,12 +6,25 @@ import useAuth from '../../hooks/useAuth';
 const Navbar = () => {
     const { user, logout } = useAuth()
     const navigate = useNavigate()
+    const [userRole, setUserRole] = useState([])
 
     const handlelogOut = () => {
         logout().then(() => {
             navigate('/')
         }).catch(err => console.log(err.message))
     }
+
+    useEffect(() => {
+        const res = async () => {
+            await axiosSecure.get(`/users/${user?.email}`)
+                .then(res => {
+                    console.log(res.data);
+                    setUserRole(res.data?.role)
+
+                })
+        }
+        res()
+    }, [user?.email])
 
     const links = <>
         <NavLink to='/' className='text-lg md:mr-3'>Home</NavLink>
@@ -20,7 +33,7 @@ const Navbar = () => {
     </>
 
     return (
-        <div className="navbar bg-gradient-to-r from-purple-300 sticky top-0 z-10 to-pink-100 px-6 py-3  ">
+        <div className="navbar bg-gradient-to-r from-purple-300 sticky top-0 z-50 to-pink-100 md:px-6 py-3  ">
             <div className="navbar-start">
                 <div className="dropdown">
                     <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -74,11 +87,23 @@ const Navbar = () => {
                             <button disabled={true} className="text-start pl-3 cursor-not-allowed ">
                                 {user?.displayName}
                             </button>
-                            {
-                                user && <>
-                                    <li><Link to='/dashboard' className='justify-between'>Dashboard</Link></li>
+                            {user && (
+                                <>
+                                    {userRole === 'admin' ? (
+                                        <li>
+                                            <Link to='/dashboard/adminprofile' className='justify-between'>
+                                                Dashboard
+                                            </Link>
+                                        </li>
+                                    ) : (
+                                        <li>
+                                                <Link to='/dashboard/myprofile' className='justify-between'>
+                                                Dashboard
+                                            </Link>
+                                        </li>
+                                    )}
                                 </>
-                            }
+                            )}
                             <li onClick={handlelogOut} ><p>Logout</p></li>
                         </ul>
                     </div> : <Link to='/register' className="px-4 py-2 rounded-lg bg-purple-400">Join Us</Link>

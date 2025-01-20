@@ -1,19 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import useAuth from '../hooks/useAuth';
 import useAxiosSecure from '../hooks/useAxiosSecure';
 import { useQuery } from '@tanstack/react-query';
 import { Link } from 'react-router-dom';
 import toast from 'react-hot-toast';
+import Pagination from '../component/Pagination';
 
 const Allreview = () => {
     const axiosSecure = useAxiosSecure()
+    const [currentPage,setCurrentPage] = useState(1)
 
-    const { data: allreview = [],refetch } = useQuery({
-        queryKey: ['allreview'],
+    const { data: allreview = {},refetch } = useQuery({
+        queryKey: ['allreview',currentPage],
         queryFn: async () => {
-            const res = await axiosSecure.get(`/admin/reviews`)
+            const res = await axiosSecure.get(`/admin/reviews?page=${currentPage}`)
             return res.data
-        }
+        },
+        enabled:true
+
     })
 
     const handleDelete = async (id) => {
@@ -43,7 +47,7 @@ const Allreview = () => {
                     </thead>
                     <tbody className='text-center'>
                         {
-                            allreview?.map((review) => <tr key={review._id}>
+                            allreview?.data?.map((review) => <tr key={review._id}>
                                 <td>
                                     {review.title}
                                 </td>
@@ -63,6 +67,13 @@ const Allreview = () => {
                         }
                     </tbody>
                 </table>
+            </div>
+            <div className='pb-4'>
+                <Pagination
+                    currentPage={allreview.currentPage}
+                    totalPages={allreview.totalPages}
+                    onPageChange={(page) => setCurrentPage(page)}
+                />
             </div>
         </div>
     );

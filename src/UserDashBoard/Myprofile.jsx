@@ -2,10 +2,11 @@ import React from 'react';
 import useAuth from '../hooks/useAuth';
 import usePayments from '../hooks/usePayments';
 import ProfileRow from '../component/ProfileRow';
+import useUsers from '../hooks/useUsers';
 
 const Myprofile = () => {
     const { user } = useAuth();
-    const { payments } = usePayments();
+    const [users]= useUsers()
 
     return (
         <div className="flex justify-center flex-col items-center p-4">
@@ -22,7 +23,7 @@ const Myprofile = () => {
                     </div>
                     <div className="sm:ml-6 mt-4 sm:mt-0 text-center sm:text-left">
                         <h1 className="text-xl font-bold text-gray-800">{user?.displayName}</h1>
-                        <p className="text-gray-600">User</p>
+                        <p className="text-gray-600">{users?.role === 'admin' ? "Premium User" : "General"}</p>
                     </div>
                 </div>
                 {/* Profile Details */}
@@ -30,7 +31,7 @@ const Myprofile = () => {
                     <ProfileRow label="Email" value={user.email} />
                     <ProfileRow
                         label="Subscription Type"
-                        value={payments?.title || 'Unavailable'}
+                        value={users?.subscription || 'bronze'}
                     />
                     <ProfileRow label="Time Zone" value={user.metadata.lastSignInTime} />
                 </div>

@@ -14,10 +14,11 @@ const UpcomingMealDetails = () => {
     const { user } = useAuth();
     const [reviews, setReviews] = useState([]);
     const [like, setLike] = useState(upcomingMeals.likes || "");
+    const [hasLiked, setHasLiked] = useState(false);
     const axiosSecure = useAxiosSecure();
     const axiosPublic = useAxiosPublic();
     const navigate = useNavigate();
-    const [users, setUsers] = useState()
+    const [users, setUsers] = useState([])
 
     useEffect(() => {
         axiosPublic.get(`/reviews/${_id}`)
@@ -41,8 +42,6 @@ const UpcomingMealDetails = () => {
         res()
     }, [user?.email])
 
-console.log(users?.subscription);
-
     const renderStar = (rating) => {
         const fullstar = Math.floor(rating);
         const halfstar = rating % 1 !== 0;
@@ -50,9 +49,9 @@ console.log(users?.subscription);
 
         return (
             <>
-                {Array(fullstar).fill(<FaStar className="text-yellow-500" />)}
+                {Array(fullstar)?.fill(<FaStar className="text-yellow-500" />)}
                 {halfstar && <FaStarHalfAlt className="text-yellow-500" />}
-                {Array(emptystar).fill(<FaRegStar className="text-gray-400" />)}
+                {Array(emptystar)?.fill(<FaRegStar className="text-gray-400" />)}
             </>
         );
     };
@@ -84,12 +83,19 @@ console.log(users?.subscription);
         e.target.reset();
     };
 
+    
     const handlelikes = async () => {
         if (user) {
+            if (hasLiked) {
+                toast.error('You have already liked this meal!');
+                return;
+            }
+
             if (users?.subscription === 'Silver' || users?.subscription === 'Gold' || users?.subscription === 'Platinum') {
                 const response = await axiosSecure.patch(`upcomingmeal/like/${_id}`);
-                if (response.data.status === 200) {
+                if (response.data.modifiedCount > 0) {
                     setLike(prev => prev + 1);
+                    setHasLiked(true);
                     toast.success('Like added!');
                 }
             } else {
@@ -99,9 +105,6 @@ console.log(users?.subscription);
             navigate('/login');
         }
     };
-
-    
-
 
 
     return (
@@ -146,9 +149,11 @@ console.log(users?.subscription);
                     <p className="mt-3">
                         <span className='font-medium'>Ingredient Used:</span> {ingredients}
                     </p>
+
                     <div className='mt-3 flex gap-x-3'>
-                        <button onClick={handlelikes} className="flex items-center bg-purple-400 py-2 px-3 rounded-lg">
+                        <button onClick={handlelikes} disabled={hasLiked} className="flex items-center bg-purple-400 py-2 px-3 rounded-lg">
                             <BiSolidLike />
+                            {hasLiked && <span className="ml-2 text-gray-500">Liked</span>}
                         </button>
                     </div>
                 </div>

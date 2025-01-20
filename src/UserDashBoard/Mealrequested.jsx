@@ -1,30 +1,38 @@
 import { useQuery } from '@tanstack/react-query';
-import React from 'react';
+import React, { useState } from 'react';
 import useAxiosSecure from '../hooks/useAxiosSecure';
 import toast from 'react-hot-toast';
 import useAuth from '../hooks/useAuth';
+import Pagination from '../component/Pagination';
 
 const Mealrequested = () => {
     const {user}= useAuth()
     const axiosSecure = useAxiosSecure()
+    const [currentPage,setCurrentPage]= useState(1)
 
-    const { data: mealRequest = [],refetch } = useQuery({
-        queryKey: ['mealrequest'],
+    const { data: mealRequest = {},refetch } = useQuery({
+        queryKey: ['mealrequest',currentPage],
         queryFn: async () => {
-            const res = await axiosSecure.get(`/mealrequest/user/${user?.email}`)
+            const res = await axiosSecure.get(`/mealrequest/user/${user?.email}?page=${currentPage}`)
             return res.data
-        }
+        },
+        enabled:true
     })
 
     const handledelete = (id) => {
-        axiosSecure.delete(`/mealreq/useremail/${user?.email}/meal/${id}`)
-            .then(res => {
-                console.log(res.data);
-                if (res.data.deletedCount > 0) {
-                    refetch()
-                    toast.success('Cencel Requested Meal')
-                }
-        })
+        if (mealRequest.status !== 'delivered') {
+            axiosSecure.delete(`/mealreq/useremail/${user?.email}/meal/${id}`)
+                .then(res => {
+                    console.log(res.data);
+                    if (res.data.deletedCount > 0) {
+                        refetch()
+                        toast.success('Cencel Requested Meal')
+                    }
+                })
+        } else {
+            toast.error("can't cencel it's already delivered")
+        }
+     
     }
 
     return (
@@ -43,7 +51,7 @@ const Mealrequested = () => {
                     </thead>
                     <tbody className='text-center'>
                         {
-                            mealRequest?.map((request) => <tr key={request._id}>
+                            mealRequest?.data?.map((request) => <tr key={request._id}>
                                 <td>
                                     {request.title}
                                 </td>
@@ -66,6 +74,13 @@ const Mealrequested = () => {
                         }
                     </tbody>
                 </table>
+            </div>
+            <div className='pb-4'>
+                <Pagination
+                    currentPage={mealRequest.currentPage}
+                    totalPages={mealRequest.totalPages}
+                    onPageChange={(page) => setCurrentPage(page)}
+                />
             </div>
         </div>
     );

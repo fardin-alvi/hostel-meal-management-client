@@ -31,7 +31,7 @@ const Package = () => {
                 <FaArrowRightFromBracket className="mt-4" size={30} />
             </div>
             <div className="mt-10 flex items-center justify-center">
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 p-6">
+                <div className="grid grid-cols-3 md:grid-cols-3 gap-8 p-6">
                     {plans?.map((plan, index) => (
                         <Link to={`/checkout/${plan._id}`}
                             key={index}
