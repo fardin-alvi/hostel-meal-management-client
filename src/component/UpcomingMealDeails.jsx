@@ -12,7 +12,6 @@ const UpcomingMealDetails = () => {
     const upcomingMeals = useLoaderData();
     const { image, title, price, rating, distributor, postTime, description, ingredients, _id, likes } = upcomingMeals;
     const { user } = useAuth();
-    const [review, setReview] = useState('');
     const [reviews, setReviews] = useState([]);
     const [like, setLike] = useState(upcomingMeals.likes || "");
     const axiosSecure = useAxiosSecure();
@@ -42,6 +41,8 @@ const UpcomingMealDetails = () => {
         res()
     }, [user?.email])
 
+console.log(users?.subscription);
+
     const renderStar = (rating) => {
         const fullstar = Math.floor(rating);
         const halfstar = rating % 1 !== 0;
@@ -55,8 +56,6 @@ const UpcomingMealDetails = () => {
             </>
         );
     };
-
-    console.log(reviews);
 
     const handleReviewSubmit = (e) => {
         e.preventDefault();
@@ -87,11 +86,9 @@ const UpcomingMealDetails = () => {
 
     const handlelikes = async () => {
         if (user) {
-            console.log("User Subscription: ", user?.subscription
-            );
             if (users?.subscription === 'Silver' || users?.subscription === 'Gold' || users?.subscription === 'Platinum') {
-                const response = await axiosSecure.patch(`/like/${_id}`);
-                if (response.status === 200) {
+                const response = await axiosSecure.patch(`upcomingmeal/like/${_id}`);
+                if (response.data.status === 200) {
                     setLike(prev => prev + 1);
                     toast.success('Like added!');
                 }
@@ -102,6 +99,9 @@ const UpcomingMealDetails = () => {
             navigate('/login');
         }
     };
+
+    
+
 
 
     return (

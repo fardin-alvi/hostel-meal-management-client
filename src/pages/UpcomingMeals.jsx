@@ -3,6 +3,7 @@ import React from 'react';
 import useAxiosPublic from '../hooks/useAxiosPublic';
 import MealCard from '../component/MealCard';
 import { Bars } from 'react-loader-spinner';
+import UpcomingMealCard from '../component/UpcomingMealCard';
 
 const UpcomingMeals = () => {
     const axiosPublic = useAxiosPublic()
@@ -32,7 +33,7 @@ const UpcomingMeals = () => {
     return (
         <div className='grid lg:grid-cols-4 px-6 bg-gradient-to-r from-purple-50 to-pink-50 md:grid-cols-3 grid-cols-1 pt-8 pb-10  gap-3'>
             {
-                upcomingMeals?.map(meal => <MealCard key={meal._id} meal={meal} />)
+                upcomingMeals?.map(meal => <UpcomingMealCard key={meal._id} meal={meal} />)
             }
         </div>
     );

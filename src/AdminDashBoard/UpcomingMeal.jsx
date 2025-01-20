@@ -18,10 +18,14 @@ const UpcomingMeal = () => {
     })
 
     const handlePublish = async (meal) => {
-        const res = await axiosSecure.post('/upcomingmeal/byadmin', meal)
-        if (res.data.insertedId) {
-            refetch()
-            toast.success('Meal Published')
+        if (upcominMeal.likes >= 10) {
+            const res = await axiosSecure.post('/upcomingmeal/byadmin', meal)
+            if (res.data.insertedId) {
+                toast.success('Meal Published')
+                refetch()
+            }
+        } else {
+            toast.error("Doesn't have enough likes for publish")
         }
     }
 
