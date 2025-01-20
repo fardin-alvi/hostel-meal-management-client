@@ -13,7 +13,7 @@ const Meals = () => {
     const [category, setCategory] = useState('All Categories');
     const [price, setPrice] = useState('');
     const [page, setPage] = useState(1);
-    const [meals, isLoading, hasNextPage] = useMeals(search, category, price,page)
+    const [meals, isLoading, hasNextPage] = useMeals(search, category, price, page)
 
 
     const loadMeals = () => {
