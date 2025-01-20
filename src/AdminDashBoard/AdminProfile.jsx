@@ -7,6 +7,7 @@ import useUsers from '../hooks/useUsers';
 const AdminProfile = () => {
     const { user } = useAuth()
     const [users] = useUsers()
+    console.log(users);
 
     return (
         <div className="flex justify-center flex-col items-center p-4">
@@ -22,7 +23,7 @@ const AdminProfile = () => {
                     <div className="sm:ml-6 mt-4 sm:mt-0 text-center sm:text-left">
                         <h1 className="text-xl font-bold text-gray-800">{user?.displayName}</h1>
                         {
-                            users?.role === 'admin' ? <div className="text-gray-600 flex items-center"><LuBadgeCheck /> <span>Premium User</span> </div> : <div className="text-gray-600 flex items-center "><LuBadge /><span>Generel</span></div>
+                            users?.subscription !== 'bronze' ? <div className="text-gray-600 flex items-center gap-x-2 justify-center"><LuBadgeCheck className='text-green-500' /><span>Premium User</span></div> : <div className="text-gray-600 flex items-center justify-center gap-x-2 "><LuBadge className='text-gray-400' /><span>Generel User</span></div>
                         }
                     </div>
                 </div>

@@ -11,7 +11,7 @@ const Package = () => {
     useEffect(() => {
         const findPlans = async () => {
             try {
-                const res = await axios.get('https://bunk-server.vercel.app/package');
+                const res = await axios.get('http://localhost:5000/package');
                 setPlans(res.data);
             } catch (error) {
                 console.error("Error fetching packages:", error);

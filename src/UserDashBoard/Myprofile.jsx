@@ -3,10 +3,11 @@ import useAuth from '../hooks/useAuth';
 import usePayments from '../hooks/usePayments';
 import ProfileRow from '../component/ProfileRow';
 import useUsers from '../hooks/useUsers';
+import { LuBadge, LuBadgeCheck } from 'react-icons/lu';
 
 const Myprofile = () => {
     const { user } = useAuth();
-    const [users]= useUsers()
+    const [users] = useUsers()
 
     return (
         <div className="flex justify-center flex-col items-center p-4">
@@ -21,7 +22,9 @@ const Myprofile = () => {
                     </div>
                     <div className="sm:ml-6 mt-4 sm:mt-0 text-center sm:text-left">
                         <h1 className="text-xl font-bold text-gray-800">{user?.displayName}</h1>
-                        <p className="text-gray-600">{users?.role === 'admin' ? "Premium User" : "General"}</p>
+                        {
+                            users?.subscription !== 'Bronze' ? <div className="text-gray-600 flex items-center gap-x-2 justify-center"><LuBadgeCheck className='text-green-500' /><span>Premium User</span></div> : <div className="text-gray-600 flex items-center justify-center gap-x-2 "><LuBadge className='text-red-300' /><span>Generel User</span></div>
+                        }
                     </div>
                 </div>
                 <div className="mt-6 space-y-4">
