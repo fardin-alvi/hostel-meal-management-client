@@ -2,11 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { Link, NavLink, useNavigate, useParams } from 'react-router-dom';
 import logo from '../../assets/logo.png'
 import useAuth from '../../hooks/useAuth';
+import useAxiosSecure from '../../hooks/useAxiosSecure';
 
 const Navbar = () => {
     const { user, logout } = useAuth()
     const navigate = useNavigate()
     const [userRole, setUserRole] = useState([])
+    const axiosSecure = useAxiosSecure()
 
     const handlelogOut = () => {
         logout().then(() => {
