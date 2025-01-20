@@ -1,11 +1,13 @@
 # BunkInn 
-* A Hostel Management system for a university, enabling administrators to manage student meals and food and reviews , students can easily get information about their food on daily . *
+A Hostel Management system for a university, enabling administrators to manage student meals and food and reviews , students can easily get information about their food on daily .
 
-**Website Name:** BunkInn
-**Admin Username:** selim
-**Admin Email:** selim@gmail.com 
-**Admin Password:** A123456l  
-**Live Site URL:** https://bunkinn-41df5.web.app
+## Credential
+
+- **Admin Username:** selim
+- **Admin Email:** selim@gmail.com 
+- **Admin Password:** A123456l  
+
+- **Live Site URL:** https://bunkinn-41df5.web.app
 
 ## Features
 - Secure login for students and admins.
