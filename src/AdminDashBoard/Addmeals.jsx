@@ -74,7 +74,6 @@ const Addmeals = () => {
                 toast.success('Meal Uploaded Successfully');
             }
         } catch (error) {
-            console.error('Error:', error);
             toast.error('Failed to upload meal. Please try again.');
         }
     };
@@ -162,7 +161,7 @@ const Addmeals = () => {
                             <label className="block text-sm font-medium text-gray-700">Image</label>
                             <input
                                 type="file"
-                                className="file-input file-input-bordered file:bg-purple-400 file:hover:bg-purple-600 file:text-white file:hover:bg-purple-600 w-96 mt-1"
+                                className="file-input file-input-bordered file:bg-purple-400 file:text-white file:hover:bg-purple-600 w-96 mt-1"
                                 {...register('image', { required: 'Image is required' })}
                                 onChange={(e) => setImage(URL.createObjectURL(e.target.files[0]))}
                             />

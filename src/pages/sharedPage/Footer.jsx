@@ -1,13 +1,14 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
     return (
         <footer className="footer footer-center bg-gradient-to-r from-purple-300 to-pink-200 text-base-content rounded p-10">
             <nav className="grid grid-flow-col gap-4">
-                <a className="link link-hover">About us</a>
-                <a className="link link-hover">Contact</a>
-                <a className="link link-hover">Meals</a>
-                <a className="link link-hover">Upcoming Meals</a>
+                <Link to='/' className="link link-hover">About us</Link>
+                <Link to='/'  className="link link-hover">Contact</Link>
+                <Link to='/meals' className="link link-hover">Meals</Link>
+                <Link to='/upcoming' className="link link-hover">Upcoming Meals</Link>
             </nav>
             <nav>
                 <div className="grid grid-flow-col gap-4">

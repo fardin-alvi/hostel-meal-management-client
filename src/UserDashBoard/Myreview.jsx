@@ -31,7 +31,6 @@ const Myreview = () => {
                 toast.error('Failed to delete');
             }
         } catch (error) {
-            console.error('Error deleting review:', error);
             toast.error('Error deleting review');
         }
     }

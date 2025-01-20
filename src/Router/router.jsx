@@ -46,7 +46,7 @@ const router = createBrowserRouter([
             {
                 path: 'meal/:id',
                 element: <Mealdetials />,
-                loader: ({ params }) => fetch(`http://localhost:5000/meal/${params.id}`)
+                loader: ({ params }) => fetch(`https://bunk-server.vercel.app/meal/${params.id}`)
             },
             {
                 path: 'meals',
@@ -59,14 +59,14 @@ const router = createBrowserRouter([
             {
                 path: '/upcoming/meal/details/:id',
                 element: <UpcomingMealDetails />,
-                loader: ({ params }) => fetch(`http://localhost:5000/upcoming/meal/details/${params.id}`)
+                loader: ({ params }) => fetch(`https://bunk-server.vercel.app/upcoming/meal/details/${params.id}`)
             },
             {
                 path: 'checkout/:id',
                 element: <Privateroute>
                     <Payment />
                 </Privateroute>,
-                loader: ({ params }) => fetch(`http://localhost:5000/package/${params.id}`)
+                loader: ({ params }) => fetch(`https://bunk-server.vercel.app/package/${params.id}`)
             },
         ]
     },
@@ -84,18 +84,18 @@ const router = createBrowserRouter([
             },
             {
                 path: 'myreview',
-                element:<Myreview/>
+                element: <Myreview />
             },
             {
                 path: 'payment-history',
-                element:<PaymentHistory/>
+                element: <PaymentHistory />
             },
 
             // admin routes
 
             {
                 path: 'adminprofile',
-                element:<AdminProfile/>
+                element: <AdminProfile />
             },
             {
                 path: 'manageuser',
@@ -111,7 +111,7 @@ const router = createBrowserRouter([
             },
             {
                 path: 'allreview',
-                element:<Allreview/>
+                element: <Allreview />
             },
             {
                 path: 'servemeal',

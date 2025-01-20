@@ -23,7 +23,6 @@ const Mealrequested = () => {
         if (mealRequest.status !== 'delivered') {
             axiosSecure.delete(`/mealreq/useremail/${user?.email}/meal/${id}`)
                 .then(res => {
-                    console.log(res.data);
                     if (res.data.deletedCount > 0) {
                         refetch()
                         toast.success('Cencel Requested Meal')

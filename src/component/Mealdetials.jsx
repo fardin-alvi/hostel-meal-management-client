@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useLoaderData, useNavigate } from 'react-router-dom';
-import { FaDiagnoses, FaMapMarkerAlt, FaRegStar, FaStar, FaStarHalfAlt } from "react-icons/fa";
+import { FaDiagnoses,  FaRegStar, FaStar, FaStarHalfAlt } from "react-icons/fa";
 import { MdOutlineTimeline } from "react-icons/md";
 import { BiSolidLike } from "react-icons/bi";
 import useAuth from '../hooks/useAuth';
@@ -65,7 +65,6 @@ const Mealdetials = () => {
                 toast.success('Review Added');
             })
             .catch(error => {
-                console.error('Error posting review:', error);
                 toast.error('Failed to add review');
             });
 

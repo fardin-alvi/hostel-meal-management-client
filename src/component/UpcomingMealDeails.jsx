@@ -34,7 +34,6 @@ const UpcomingMealDetails = () => {
         const res = async () => {
             await axiosSecure.get(`/users/${user?.email}`)
                 .then(res => {
-                    console.log(res.data);
                     setUsers(res.data)
 
                 })
@@ -76,7 +75,6 @@ const UpcomingMealDetails = () => {
                 toast.success('Review Added');
             })
             .catch(error => {
-                console.error('Error posting review:', error);
                 toast.error('Failed to add review');
             });
 

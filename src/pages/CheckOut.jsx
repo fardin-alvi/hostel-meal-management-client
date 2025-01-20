@@ -26,14 +26,11 @@ const CheckOut = () => {
         },
         enabled: !!id
     })
-    
-    console.log(plan);
 
     useEffect(() => {
         if (plan?.price) {
             axiosSecure.post('/payment-intent-method', { price: plan?.price })
                 .then(res => {
-                    console.log(res.data.clientSecret);
                     setClientSecret(res.data?.clientSecret)
                 })
         }
@@ -59,7 +56,6 @@ const CheckOut = () => {
         if (error) {
             setError('Payment failed:', error.message);
         } else {
-            console.log('payment methood', paymentMethod);
             setError('')
         }
 
@@ -76,7 +72,6 @@ const CheckOut = () => {
             console.log('error', ConfirmError);
 
         } else {
-            console.log(paymentIntent);
             if (paymentIntent.status === 'succeeded') {
                 setId(paymentIntent.id)
                 card.clear();

@@ -1,10 +1,7 @@
 import React from 'react';
 import useAuth from '../hooks/useAuth';
-import { FaEdit, FaMapMarkerAlt, FaSignOutAlt, FaUpload } from 'react-icons/fa';
+import { LuBadge, LuBadgeCheck } from "react-icons/lu";
 import ProfileRow from '../component/ProfileRow';
-import usePayments from '../hooks/usePayments';
-import { useQuery } from '@tanstack/react-query';
-import useAxiosSecure from '../hooks/useAxiosSecure';
 import useUsers from '../hooks/useUsers';
 
 const AdminProfile = () => {
@@ -24,7 +21,9 @@ const AdminProfile = () => {
                     </div>
                     <div className="sm:ml-6 mt-4 sm:mt-0 text-center sm:text-left">
                         <h1 className="text-xl font-bold text-gray-800">{user?.displayName}</h1>
-                        <p className="text-gray-600">{users?.role ==='admin' ? "Premium User" : "General"}</p>
+                        {
+                            users?.role === 'admin' ? <div className="text-gray-600 flex items-center"><LuBadgeCheck /> <span>Premium User</span> </div> : <div className="text-gray-600 flex items-center "><LuBadge /><span>Generel</span></div>
+                        }
                     </div>
                 </div>
                 <div className="mt-6 space-y-4">

@@ -14,7 +14,6 @@ const ManageUsers = () => {
         queryKey: ['userinfo',search,currentPage],
         queryFn: async () => {
             const res = await axiosSecure.get(`/users?search=${search}&page=${currentPage}`)
-            console.log(res.data);
             return res.data
         },
         enabled: true,

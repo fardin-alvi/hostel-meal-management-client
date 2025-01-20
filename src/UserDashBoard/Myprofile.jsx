@@ -10,9 +10,7 @@ const Myprofile = () => {
 
     return (
         <div className="flex justify-center flex-col items-center p-4">
-            {/* Profile Section */}
             <div className="bg-gradient-to-r from-purple-50 to-pink-50 w-full max-w-4xl shadow-lg rounded-lg mt-4 p-6">
-                {/* Profile Picture and Basic Info */}
                 <div className="flex flex-col sm:flex-row items-center sm:items-start">
                     <div className="relative">
                         <img
@@ -26,7 +24,6 @@ const Myprofile = () => {
                         <p className="text-gray-600">{users?.role === 'admin' ? "Premium User" : "General"}</p>
                     </div>
                 </div>
-                {/* Profile Details */}
                 <div className="mt-6 space-y-4">
                     <ProfileRow label="Email" value={user.email} />
                     <ProfileRow

@@ -1,9 +1,9 @@
 import React from 'react';
 import { FaStar, FaStarHalfAlt, FaRegStar } from 'react-icons/fa'
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const MealCard = ({ meal }) => {
-    const { image, title, price, rating, _id } = meal
+    const { title, price, rating, _id } = meal
 
     const renderStar = (rating) => {
         const fullstar = Math.floor(rating)

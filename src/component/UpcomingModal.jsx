@@ -25,7 +25,6 @@ const UpcomingModal = ({ isOpen, closeModal, refetch }) => {
             });
             return response.data.data.display_url;
         } catch (error) {
-            console.error('Image upload failed:', error);
             throw new Error('Failed to upload image');
         }
     };
@@ -70,7 +69,6 @@ const UpcomingModal = ({ isOpen, closeModal, refetch }) => {
                 toast.success('Meal Added Successfully');
             }
         } catch (error) {
-            console.error('Error submitting form:', error);
             toast.error('Failed to add meal. Please try again.');
         }
     };
