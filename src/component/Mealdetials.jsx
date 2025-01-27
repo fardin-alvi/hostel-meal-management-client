@@ -90,18 +90,20 @@ const Mealdetials = () => {
         }
     };
 
-    const handleMealRequest = (meal) => {
+    const handleMealRequest = async (meal) => {
         if (user) {
             if (hascliked) {
                 toast.error('you already requested for this meal')
                 return
             }
+            const mealDetails = await axiosPublic.get(`/meal/${_id}`);
             axiosSecure.post('/mealrequest', {
+                mealId: _id,
                 title: meal.title,
                 likes: meal.likes || 0,
                 requested_user: user.email,
                 requested_user_name: user.displayName,
-                review_count: review.length,
+                review_count: mealDetails.data.review_count,
                 status: 'pending',
             })
                 .then(res => {

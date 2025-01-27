@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import axios from "axios";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import { useQuery } from "@tanstack/react-query";
 
 const Package = () => {
     const [plans, setPlans] = useState([])
@@ -11,16 +12,14 @@ const Package = () => {
     useEffect(() => {
         const findPlans = async () => {
             try {
-                const res = await axios.get('http://localhost:5000/package');
+                const res = await axios.get('https://bunk-server.vercel.app/package');
                 setPlans(res.data);
             } catch (error) {
                 console.error("Error fetching packages:", error);
             }
         };
-
         findPlans();
     }, []);
-
 
     return (
         <div className="flex flex-col md:flex-row justify-evenly mt-10 md:mt-0 items-center">

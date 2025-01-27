@@ -7,7 +7,6 @@ import useUsers from '../hooks/useUsers';
 const AdminProfile = () => {
     const { user } = useAuth()
     const [users] = useUsers()
-    console.log(users);
 
     return (
         <div className="flex justify-center flex-col items-center p-4">

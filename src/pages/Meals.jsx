@@ -15,14 +15,11 @@ const Meals = () => {
     const [page, setPage] = useState(1);
     const [meals, isLoading, hasNextPage] = useMeals(search, category, price, page)
 
-
     const loadMeals = () => {
         if (hasNextPage) {
             setPage(prevPage => prevPage + 1)
         }
     }
-
-    console.log(search);
 
     return (
         <div className='px-6 bg-gradient-to-r from-purple-50 to-pink-50'>
@@ -63,17 +60,11 @@ const Meals = () => {
                     </select>
                 </div>
             </div>
-            {/* <div className='grid lg:grid-cols-4 md:grid-cols-3 grid-cols-1 pt-8 pb-10  gap-3'>
-                {
-                    meals?.map(meal => <MealCard key={meal?._id} meal={meal} />)
-                }
-            </div> */}
 
             <InfiniteScroll
                 pageStart={0}
                 // loadMore={loadMeals}
                 hasMore={hasNextPage}
-                loader={<div key={0}>Loading...</div>}
             >
                 <div className='grid lg:grid-cols-4 md:grid-cols-3 grid-cols-1 pt-8 pb-10  gap-3'>
                     {

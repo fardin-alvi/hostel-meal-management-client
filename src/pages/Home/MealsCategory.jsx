@@ -43,16 +43,28 @@ const MealsCategory = () => {
             <div className="w-full max-w-7xl px-2">
                 <Tab.Group>
                     <Tab.List className="flex justify-center gap-4">
-                        <Tab className="border-gray-600 rounded-lg p-2">
+                        <Tab className={({ selected }) =>
+                            `p-2 ${selected ? 'text-purple-400 text-lg' : 'text-black'
+                            }`
+                        }>
                             Breakfast
                         </Tab>
-                        <Tab className="border-gray-600 rounded-lg p-2">
+                        <Tab className={({ selected }) =>
+                            `p-2 ${selected ? 'text-purple-400 text-lg' : 'text-black'
+                            }`
+                        }>
                             Lunch
                         </Tab>
-                        <Tab className="border-gray-600 rounded-lg p-2">
+                        <Tab className={({ selected }) =>
+                            `p-2 ${selected ? 'text-purple-400 text-lg' : 'text-black'
+                            }`
+                        }>
                             Dinner
                         </Tab>
-                        <Tab className="border-gray-600 rounded-lg p-2">
+                        <Tab className={({ selected }) =>
+                            `p-2 ${selected ? 'text-purple-400 text-lg' : 'text-black'
+                            }`
+                        }>
                             All Meals
                         </Tab>
                     </Tab.List>

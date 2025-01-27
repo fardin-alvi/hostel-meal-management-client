@@ -75,55 +75,55 @@ const DashBoard = () => {
                     ) : (
                         <>
                             <li className="text-lg">
-                                <NavLink to="/dashboard/myprofile" onClick={toggleMenu}>
+                                <Link to="/dashboard/myprofile" onClick={toggleMenu}>
                                     <ImProfile />
                                     My Profile
-                                </NavLink>
+                                </Link>
                             </li>
                             <li className="text-lg">
-                                <NavLink to="/dashboard/mealrequest" onClick={toggleMenu}>
+                                <Link to="/dashboard/mealrequest" onClick={toggleMenu}>
                                     <BiFoodMenu />
                                     Requested Meal
-                                </NavLink>
+                                </Link>
                             </li>
                             <li className="text-lg">
-                                <NavLink to="/dashboard/myreview" onClick={toggleMenu}>
+                                <Link to="/dashboard/myreview" onClick={toggleMenu}>
                                     <MdOutlineRateReview />
                                     My Reviews
-                                </NavLink>
+                                </Link>
                             </li>
                             <li className="text-lg">
-                                <NavLink to="/dashboard/payment-history" onClick={toggleMenu}>
+                                <Link to="/dashboard/payment-history" onClick={toggleMenu}>
                                     <MdOutlinePayments />
                                     Payment History
-                                </NavLink>
+                                </Link>
                             </li>
                         </>
                     )}
                     <div className="divider"></div>
                     <li className="text-lg">
-                        <NavLink to="/" onClick={toggleMenu}>
+                        <Link to="/" onClick={toggleMenu}>
                             <FaHome />
                             Home
-                        </NavLink>
+                        </Link>
                     </li>
                     <li className="text-lg">
-                        <NavLink to="/meals" onClick={toggleMenu}>
+                        <Link to="/meals" onClick={toggleMenu}>
                             <MdFoodBank />
                             Meals
-                        </NavLink>
+                        </Link>
                     </li>
                     <li className="text-lg">
-                        <NavLink to="/upcoming" onClick={toggleMenu}>
+                        <Link to="/upcoming" onClick={toggleMenu}>
                             <MdUpcoming />
                             Upcoming Meals
-                        </NavLink>
+                        </Link>
                     </li>
                     <li className="text-lg">
-                        <NavLink to="/" onClick={toggleMenu}>
+                        <Link to="/" onClick={toggleMenu}>
                             <FaMessage />
                             Contact
-                        </NavLink>
+                        </Link>
                     </li>
                 </ul>
 
