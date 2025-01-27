@@ -9,7 +9,6 @@ const Mainpage = () => {
             <Navbar />
             <Outlet />
             <Footer/>
-            
         </div>
     );
 };

@@ -14,10 +14,12 @@ const UpcomingMealDetails = () => {
     const { user } = useAuth();
     const [reviews, setReviews] = useState([]);
     const [like, setLike] = useState(upcomingMeals.likes || "");
+    const [hasLiked, setHasLiked] = useState(false);
     const axiosSecure = useAxiosSecure();
     const axiosPublic = useAxiosPublic();
     const navigate = useNavigate();
     const [users, setUsers] = useState([])
+    
 
     useEffect(() => {
         axiosPublic.get(`/reviews/${_id}`)
@@ -128,7 +130,7 @@ const UpcomingMealDetails = () => {
                     </div>
 
                     <div className="flex flex-col gap-y-2 mt-2">
-                        <p className="text-sm flex">{renderStar(rating)}</p>
+                        <div className="text-sm flex">{renderStar(rating)}</div>
                         <p className="flex items-center gap-x-5">
                             <div className='flex items-center gap-x-2'>
                                 <FaDiagnoses className="mr-1" />

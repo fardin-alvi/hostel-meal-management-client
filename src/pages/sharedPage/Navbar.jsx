@@ -20,7 +20,6 @@ const Navbar = () => {
         const res = async () => {
             await axiosSecure.get(`/users/${user?.email}`)
                 .then(res => {
-                    console.log(res.data);
                     setUserRole(res.data?.role)
 
                 })

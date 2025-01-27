@@ -57,6 +57,7 @@ const Mealdetials = () => {
             photoURL: user.photoURL,
             review: e.target.review.value,
             time: new Date().toLocaleString(),
+            review_count:0
         };
 
         setReviews(prevReviews => [...prevReviews, newReview]);

@@ -33,7 +33,7 @@ const UpcomingMeals = () => {
     return (
         <div className='grid lg:grid-cols-4 px-6 bg-gradient-to-r from-purple-50 to-pink-50 md:grid-cols-3 grid-cols-1 pt-8 pb-10  gap-3'>
             {
-                upcomingMeals?.data?.map(meal => <UpcomingMealCard key={meal._id} meal={meal} />)
+                upcomingMeals?.data?.map(meal => <UpcomingMealCard key={meal?._id} meal={meal} />)
             }
         </div>
     );

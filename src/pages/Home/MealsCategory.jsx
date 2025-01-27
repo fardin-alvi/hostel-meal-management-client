@@ -3,13 +3,19 @@ import { Tab } from '@headlessui/react';
 import useMeals from '../../hooks/useMeals';
 import MealCard from '../../component/MealCard';
 import { Bars } from 'react-loader-spinner';
+import { useQueryClient } from '@tanstack/react-query';
 
 
 const MealsCategory = () => {
     const [category, setCategory] = useState('');
     const [meals, isLoading, hasNextPage, refetch] = useMeals('', category, '', 1);
 
+    const queryClient = useQueryClient()
+
     useEffect(() => {
+        queryClient.invalidateQueries({
+            queryKey: ['meals', "", category, "", 1],
+        })
         refetch();
     }, [category,refetch])
 
@@ -37,16 +43,16 @@ const MealsCategory = () => {
             <div className="w-full max-w-7xl px-2">
                 <Tab.Group>
                     <Tab.List className="flex justify-center gap-4">
-                        <Tab onClick={() => setCategory('breakfast')} className="border-gray-600 rounded-lg p-2">
+                        <Tab className="border-gray-600 rounded-lg p-2">
                             Breakfast
                         </Tab>
-                        <Tab onClick={() => setCategory('lunch')} className="border-gray-600 rounded-lg p-2">
+                        <Tab className="border-gray-600 rounded-lg p-2">
                             Lunch
                         </Tab>
-                        <Tab onClick={() => setCategory('dinner')} className="border-gray-600 rounded-lg p-2">
+                        <Tab className="border-gray-600 rounded-lg p-2">
                             Dinner
                         </Tab>
-                        <Tab onClick={() => setCategory('')} className="border-gray-600 rounded-lg p-2">
+                        <Tab className="border-gray-600 rounded-lg p-2">
                             All Meals
                         </Tab>
                     </Tab.List>

@@ -19,20 +19,19 @@ const Mealrequested = () => {
         enabled:true
     })
 
-    const handledelete = (id) => {
-        if (mealRequest.status !== 'delivered') {
+    const handledelete = (id, status) => {
+        if (status !== 'delivered') {
             axiosSecure.delete(`/mealreq/useremail/${user?.email}/meal/${id}`)
                 .then(res => {
                     if (res.data.deletedCount > 0) {
-                        refetch()
-                        toast.success('Cencel Requested Meal')
+                        refetch();
+                        toast.success('Canceled Requested Meal');
                     }
-                })
+                });
         } else {
-            toast.error("can't cencel it's already delivered")
+            toast.error("Can't cancel, it's already delivered");
         }
-     
-    }
+    };
 
     return (
         <div className='bg-gradient-to-r from-purple-50 to-pink-50 md:mx-20 pt-5'>
@@ -67,7 +66,7 @@ const Mealrequested = () => {
                                     {request.status}
                                 </td>
                                 <td>
-                                    <button onClick={() => handledelete(request._id)} className='btn-sm bg-purple-400 px-4 rounded-xl'>Cencel</button>
+                                    <button onClick={() => handledelete(request._id, request?.status)} className='btn-sm bg-purple-400 px-4 rounded-xl'>Cencel</button>
                                 </td>
                             </tr>)
                         }
