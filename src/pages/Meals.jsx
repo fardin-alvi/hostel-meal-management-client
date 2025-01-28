@@ -1,10 +1,6 @@
-import { useQuery } from '@tanstack/react-query';
 import React, { useEffect, useState } from 'react';
-import useAxiosPublic from '../hooks/useAxiosPublic';
 import MealCard from '../component/MealCard';
-import { Select } from '@headlessui/react';
 import { FaSearch } from 'react-icons/fa';
-import { MdArrowForwardIos } from "react-icons/md";
 import useMeals from '../hooks/useMeals';
 import InfiniteScroll from 'react-infinite-scroller';
 
@@ -20,11 +16,11 @@ const Meals = () => {
             setPage(prevPage => prevPage + 1)
         }
     }
-
+    
     return (
         <div className='px-6 bg-gradient-to-r from-purple-50 to-pink-50'>
             <h2 className='text-3xl text-center pt-4'>Our Meals</h2>
-            <div className='flex justify-between items-center p-3 mt-6'>
+            <div className='flex md:justify-between items-center gap-x-2 p-3 mt-6'>
                 <div className="w-full md:w-52">
                     <select
                         className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
@@ -38,7 +34,7 @@ const Meals = () => {
                         <option value="dinner">dinner</option>
                     </select>
                 </div>
-                <div className="relative w-full mb-3 md:w-1/4">
+                <div className="relative w-full md:w-1/4">
                     <input
                         type="text"
                         placeholder="Search Meals..."
@@ -66,7 +62,7 @@ const Meals = () => {
                 // loadMore={loadMeals}
                 hasMore={hasNextPage}
             >
-                <div className='grid lg:grid-cols-4 md:grid-cols-3 grid-cols-1 pt-8 pb-10  gap-3'>
+                <div className='grid lg:grid-cols-4 md:grid-cols-3 grid-cols-1 pt-8 pb-10 gap-3'>
                     {
                         meals?.map(meal => <MealCard key={meal?._id} meal={meal} />)
                     }

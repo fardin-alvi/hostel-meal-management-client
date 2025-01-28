@@ -23,7 +23,6 @@ const Allreview = () => {
     const handleDelete = async (id) => {
         try {
             const res = await axiosSecure.delete(`/admin/review/${id}`)
-            console.log(res);
             if (res.data?.deletedCount > 0) {
                 refetch()
                 toast.success('Review deleted successfully');

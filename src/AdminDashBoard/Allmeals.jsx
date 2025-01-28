@@ -44,7 +44,7 @@ const AllMeals = () => {
 
     return (
         <div className="bg-gradient-to-r from-purple-50 to-pink-50 md:mx-20 pt-5">
-            <div className="w-full pl-2 md:w-52">
+            <div className=" px-3 md:pl-2 w-52">
                 <select
                     className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
                     value={sort}
