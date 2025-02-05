@@ -1,4 +1,4 @@
-![BunkInn Logo](src/assets/banner/Screenshot%202025-02-05%20131013.png)
+![BunkInn Logo](src/assets/banner/Cover.png)
 
 # BunkInn 
 A Hostel Management system for a university, enabling administrators to manage student meals and food and reviews , students can easily get information about their food on daily .
