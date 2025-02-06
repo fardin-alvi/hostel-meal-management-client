@@ -33,7 +33,8 @@ A Hostel Management system for a university, enabling administrators to manage s
 - Tailwind Css
 - Firebase ( For Authentication )
 - MongoDB ( For Database Management)
-- Axios 
+- Axios
+- Stripe Js
 
 ### Dependencies
 - react-stripe-js: version-3.1.1
