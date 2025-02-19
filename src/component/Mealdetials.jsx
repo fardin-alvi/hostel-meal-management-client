@@ -105,6 +105,7 @@ const Mealdetials = () => {
                 requested_user_name: user.displayName,
                 review_count: mealDetails.data.review_count,
                 status: 'pending',
+                requestTime: new Date().toLocaleString('en-US', { weekday: 'short', year: 'numeric', month: 'long', day: 'numeric'})
             })
                 .then(res => {
                     if (res.data.insertedId) {

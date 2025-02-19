@@ -25,6 +25,7 @@ import Servemeal from "../AdminDashBoard/Servemeal";
 import UpcomingMeal from "../AdminDashBoard/UpcomingMeal";
 import UpcomingMealDetails from "../component/UpcomingMealDeails";
 import Adminroute from "./Adminroute";
+import AdminOverview from "../AdminDashBoard/AdminOverview";
 
 const router = createBrowserRouter([
     {
@@ -92,7 +93,10 @@ const router = createBrowserRouter([
             },
 
             // admin routes
-
+            {
+                path: 'adminoverview',
+                element:<AdminOverview/>
+            },
             {
                 path: 'adminprofile',
                 element: <AdminProfile />

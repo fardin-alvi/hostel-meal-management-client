@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { FaHome, FaBars, FaTimes } from 'react-icons/fa';
-import { MdFoodBank, MdOutlinePayments, MdOutlineRateReview, MdUpcoming } from "react-icons/md";
+import { MdDataSaverOff, MdFoodBank, MdOutlinePayments, MdOutlineRateReview, MdUpcoming } from "react-icons/md";
 import { FaMessage } from 'react-icons/fa6';
 import { RiApps2AddFill } from "react-icons/ri";
 import { CiServer } from "react-icons/ci";
@@ -29,6 +29,12 @@ const DashBoard = () => {
                     </li>
                     {isAdmin ? (
                         <>
+                            <li className="text-lg">
+                                <Link to="/dashboard/adminoverview" onClick={toggleMenu}>
+                                    <MdDataSaverOff />
+                                    Overview
+                                </Link>
+                            </li>
                             <li className="text-lg">
                                 <Link to="/dashboard/adminprofile" onClick={toggleMenu}>
                                     <ImProfile />
@@ -74,6 +80,12 @@ const DashBoard = () => {
                         </>
                     ) : (
                         <>
+                            <li className="text-lg">
+                                <Link to="/dashboard/useroverview" onClick={toggleMenu}>
+                                    <MdDataSaverOff />
+                                    Overview
+                                </Link>
+                            </li>
                             <li className="text-lg">
                                 <Link to="/dashboard/myprofile" onClick={toggleMenu}>
                                     <ImProfile />
@@ -127,8 +139,8 @@ const DashBoard = () => {
                     </li>
                 </ul>
 
-                <button 
-                    className="mt-4 bg-green-400 text-white py-2 flex items-center justify-center px-4 rounded-md text-lg md:hidden" 
+                <button
+                    className="mt-4 bg-green-400 text-white py-2 flex items-center justify-center px-4 rounded-md text-lg md:hidden"
                     onClick={toggleMenu}>
                     <FaTimes /> Close
                 </button>
