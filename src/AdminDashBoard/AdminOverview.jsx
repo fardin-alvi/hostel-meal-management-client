@@ -13,45 +13,43 @@ import useAxiosSecure from "../hooks/useAxiosSecure";
 import { Bars } from "react-loader-spinner";
 
 const AdminOverview = () => {
-    const axiosSecure = useAxiosSecure()
-    const { data: stat , isLoading } = useQuery({
+    const axiosSecure = useAxiosSecure();
+
+    const { data: stat, isLoading: statLoading } = useQuery({
         queryKey: ['admin-stats'],
         queryFn: async () => {
-            const res = await axiosSecure.get('/admin-stats')
-            return res.data
+            const res = await axiosSecure.get('/admin-stats');
+            return res.data;
         }
-    })
-    if (isLoading) {
-        return <div className="flex justify-center items-center">
-            <Bars
-                height="80"
-                width="80"
-                color="#4fa94d"
-                ariaLabel="bars-loading"
-                wrapperStyle={{}}
-                wrapperClass=""
-                visible={true}
-            />
-        </div>;
-    }
-    const user = stat.totalUsers
-    const meals = stat.totalMeals 
-    const requestMeal = stat.totalMealRequests
+    });
 
-    const data = [
-        { name: "Jan", cost: 150 },
-        { name: "Feb", cost: 300 },
-        { name: "Mar", cost: 100 },
-        { name: "Apr", cost: 200 },
-        { name: "May", cost: 300 },
-        { name: "Jun", cost: 250 },
-        { name: "Jul", cost: 245 },
-        { name: "Aug", cost: 290 },
-        { name: "Sep", cost: 350 },
-        { name: "Oct", cost: 300 },
-        { name: "Nov", cost: 200 },
-        { name: "Dec", cost: 50 },
-    ];
+    const { data: monthlyReq, isLoading: monthlyReqLoading } = useQuery({
+        queryKey: ['admin-mealChart'],
+        queryFn: async () => {
+            const res = await axiosSecure.get('/admin-mealChart');
+            return res.data;
+        }
+    });
+
+    if (statLoading || monthlyReqLoading) {
+        return (
+            <div className="flex justify-center items-center">
+                <Bars
+                    height="80"
+                    width="80"
+                    color="#4fa94d"
+                    ariaLabel="bars-loading"
+                    wrapperStyle={{}}
+                    wrapperClass=""
+                    visible={true}
+                />
+            </div>
+        );
+    }
+
+    const user = stat.totalUsers;
+    const meals = stat.totalMeals;
+    const requestMeal = stat.totalMealRequests;
 
     const stats = [
         {
@@ -73,10 +71,7 @@ const AdminOverview = () => {
 
     return (
         <div className="p-6 bg-gradient-to-r from-purple-50 to-pink-50 min-h-screen">
-            {/* Title */}
-            <h2 className="text-2xl font-bold mb-4">AdminOverview</h2>
-
-            {/* Stats Cards */}
+            <h2 className="text-2xl font-bold mb-4">Admin Overview</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
                 {stats.map((item, index) => (
                     <div
@@ -92,16 +87,15 @@ const AdminOverview = () => {
                 ))}
             </div>
 
-            {/* Chart Section */}
             <div className="bg-white p-4 rounded-lg shadow-md">
-                <h3 className="text-lg font-semibold mb-4">Average Shipping Cost</h3>
+                <h3 className="text-lg font-semibold mb-4">Monthly Meal Requests</h3>
                 <ResponsiveContainer width="100%" height={300}>
-                    <LineChart data={data} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
+                    <LineChart data={monthlyReq} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
                         <CartesianGrid strokeDasharray="3 3" />
-                        <XAxis dataKey="name" />
+                        <XAxis dataKey="month" />
                         <YAxis />
                         <Tooltip />
-                        <Line type="monotone" dataKey="cost" stroke="#00A86B" strokeWidth={2} dot={{ r: 5 }} />
+                        <Line type="monotone" dataKey="count" stroke="#00A86B" strokeWidth={2} dot={{ r: 5 }} />
                     </LineChart>
                 </ResponsiveContainer>
             </div>
@@ -110,7 +104,3 @@ const AdminOverview = () => {
 };
 
 export default AdminOverview;
-
-
-
-            
