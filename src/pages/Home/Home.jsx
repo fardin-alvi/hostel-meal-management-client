@@ -6,6 +6,7 @@ import Immergency from '../../component/Immergency';
 import Exchange from './Exchnage';
 import TodaysMenu from './TodaysMenu';
 import Reviews from './Reviews';
+import FAQ from './FAQ';
 
 const Home = () => {
     return (
@@ -15,7 +16,8 @@ const Home = () => {
             <MealsCategory />
             <TodaysMenu/>
             <Package />
-            <Reviews/>
+            <Reviews />
+            <FAQ/>
             <Exchange/>
         </div>
     );
