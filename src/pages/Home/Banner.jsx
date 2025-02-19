@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import AwesomeSlider from 'react-awesome-slider';
 import withAutoplay from 'react-awesome-slider/dist/autoplay';
 import 'react-awesome-slider/dist/styles.css';
@@ -29,7 +29,7 @@ const Banner = () => {
         {
             image: img4,
             title: 'Manage Your Hostel Like a Pro',
-            description: 'ake control of every aspect of your hostel with our all-in-one management system—easy, efficient, and effective.',
+            description: 'Take control of every aspect of your hostel with our all-in-one management system—easy, efficient, and effective.',
         },
     ];
 
@@ -37,9 +37,13 @@ const Banner = () => {
         <div className="relative md:px-6">
             <AutoplaySlider
                 play={true}
-                bullets={false}
-                interval={5000}
-                style={{ height: '430px' }}
+                cancelOnInteraction={false} 
+                interval={2000} 
+                bullets={false} 
+                style={{ height: '430px' }} 
+                cssModule={{
+                    'awssld__controls': { display: 'none' },
+                }}
             >
                 {slides.map((slide, index) => (
                     <div key={index} data-src={slide.image}>

@@ -38,31 +38,31 @@ const MealsCategory = () => {
     }
 
     return (
-        <div className="flex flex-col w-full justify-center items-center pt-16 md:px-4">
-            <h2 className='text-2xl font-medium pb-6'>Meals by Category</h2>
+        <div className="flex flex-col w-full justify-center items-center pt-6 md:px-4">
+            <h2 className='text-2xl font-medium '>Meals by Category</h2>
             <div className="w-full max-w-7xl px-2">
                 <Tab.Group>
-                    <Tab.List className="flex justify-center gap-4">
+                    <Tab.List className="flex justify-center gap-4 ">
                         <Tab className={({ selected }) =>
-                            `p-2 ${selected ? 'text-purple-400 text-lg' : 'text-black'
+                            `p-2 focus:outline-none focus:ring-0 ${selected ? 'text-purple-400 text-lg' : 'text-black'
                             }`
                         }>
                             Breakfast
                         </Tab>
                         <Tab className={({ selected }) =>
-                            `p-2 ${selected ? 'text-purple-400 text-lg' : 'text-black'
+                            `p-2 focus:outline-none focus:ring-0 ${selected ? 'text-purple-400 text-lg' : 'text-black'
                             }`
                         }>
                             Lunch
                         </Tab>
                         <Tab className={({ selected }) =>
-                            `p-2 ${selected ? 'text-purple-400 text-lg' : 'text-black'
+                            `p-2 focus:outline-none focus:ring-0 ${selected ? 'text-purple-400 text-lg' : 'text-black'
                             }`
                         }>
                             Dinner
                         </Tab>
                         <Tab className={({ selected }) =>
-                            `p-2 ${selected ? 'text-purple-400 text-lg' : 'text-black'
+                            `p-2 focus:outline-none focus:ring-0 ${selected ? 'text-purple-400 text-lg' : 'text-black'
                             }`
                         }>
                             All Meals

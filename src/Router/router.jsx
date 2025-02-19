@@ -46,7 +46,7 @@ const router = createBrowserRouter([
             {
                 path: 'meal/:id',
                 element: <Mealdetials />,
-                loader: ({ params }) => fetch(`https://bunk-server.vercel.app/meal/${params.id}`)
+                loader: ({ params }) => fetch(`http://localhost:5000/meal/${params.id}`)
             },
             {
                 path: 'meals',
@@ -59,14 +59,14 @@ const router = createBrowserRouter([
             {
                 path: '/upcoming/meal/details/:id',
                 element: <UpcomingMealDetails />,
-                loader: ({ params }) => fetch(`https://bunk-server.vercel.app/upcoming/meal/details/${params.id}`)
+                loader: ({ params }) => fetch(`http://localhost:5000/upcoming/meal/details/${params.id}`)
             },
             {
                 path: 'checkout/:id',
                 element: <Privateroute>
                     <Payment />
                 </Privateroute>,
-                loader: ({ params }) => fetch(`https://bunk-server.vercel.app/package/${params.id}`)
+                loader: ({ params }) => fetch(`http://localhost:5000/package/${params.id}`)
             },
         ]
     },
