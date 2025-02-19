@@ -18,7 +18,7 @@ const DashBoard = () => {
 
     return (
         <div className="flex flex-col md:flex-row">
-            <div className={`flex flex-col items-center bg-gradient-to-r from-purple-300 to-pink-300 py-4 px-8 
+            <div className={`flex flex-col items-center bg-gradient-to-r from-purple-300 to-pink-300 py-4 px-8 max-md:h-full
                 ${isMenuOpen ? 'absolute top-0 left-0 h-full w-3/4 z-50' : 'hidden'} md:flex md:relative md:w-1/4`}>
                 <ul className="menu w-full">
                     <li className="mb-6">

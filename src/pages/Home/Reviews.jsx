@@ -23,7 +23,7 @@ const Reviews = () => {
                 <h2 className='text-2xl font-semibold'>Top Meals Review</h2>
             </div>
             <div className="flex justify-center items-center py-12 px-2">
-                <div className="flex justify-center gap-4 max-w-7xl">
+                <div className="flex flex-col md:flex-row md:px-2 justify-center gap-4 max-w-7xl">
                     {sortedMeals.slice(0, 3).map((meal, index) => (
                         <motion.div
                             key={meal.id}

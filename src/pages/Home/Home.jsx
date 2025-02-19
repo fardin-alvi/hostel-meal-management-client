@@ -10,7 +10,7 @@ import FAQ from './FAQ';
 
 const Home = () => {
     return (
-        <div className='bg-gradient-to-r from-purple-50 to-pink-50'>
+        <div className='bg-gradient-to-r from-purple-50 to-pink-50 dark:bg-black '>
             <Banner />
             <Immergency/>
             <MealsCategory />

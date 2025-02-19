@@ -27,7 +27,7 @@ const TodaysMenu = () => {
             <div className="flex justify-center my-8">
                 <h2 className="font-medium text-2xl">Today's Menu</h2>
             </div>
-            <div className="flex justify-center gap-6">
+            <div className="flex flex-col md:flex-row items-center md:px-4 justify-center gap-6">
                 {meales.map(({ title, meal }, index) =>
                     meal ? (
                         <div
